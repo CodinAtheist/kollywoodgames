@@ -1,52 +1,1836 @@
 <!DOCTYPE html>
-<html>
+<html lang="ta-IN" data-theme="gold">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="/">
-
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Bilet Kollywood Games - Where Cinema🎬meets Gaming🎮. Explore Kollywood movie quiz games, nostalgia vault, and early access.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilet Kollywood Games | Where Cinema Meets Gaming 🎬🎮</title>
+  <meta name="description" content="Experience Bilet Kollywood Games: The world's first cinematic gaming universe for Tamil movie fans. Quiz battles, audio duels, nostalgia vaults & VIP FDFS passes.">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Kollywood Games">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <!-- Google Fonts Jua Preconnect -->
+  <!-- Google Fonts: Cinzel, Outfit, Jua -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Jua&family=Outfit:wght@300;400;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-  <title>Bilet Kollywood Games | Where Cinema🎬meets Gaming🎮</title>
-  <link rel="manifest" href="manifest.json">
   <style>
-    body {
+    /* ==========================================================
+       DESIGN SYSTEM & THEME TOKENS
+       ========================================================== */
+    :root {
+      --bg-dark: #07090e;
+      --bg-card: rgba(18, 22, 34, 0.75);
+      --bg-card-hover: rgba(26, 32, 50, 0.9);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      /* Theme 1: 70mm Gold (Default) */
+      --primary: #f59e0b;
+      --primary-glow: rgba(245, 158, 11, 0.45);
+      --accent: #ef4444;
+      --accent-glow: rgba(239, 68, 68, 0.35);
+      --border-glow: rgba(245, 158, 11, 0.3);
+      --spotlight-color: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(245, 158, 11, 0.12) 0%, rgba(239, 68, 68, 0.04) 40%, transparent 70%);
+      --badge-gradient: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+
+    [data-theme="neon"] {
+      --primary: #06b6d4;
+      --primary-glow: rgba(6, 182, 212, 0.5);
+      --accent: #ec4899;
+      --accent-glow: rgba(236, 72, 153, 0.4);
+      --border-glow: rgba(6, 182, 212, 0.35);
+      --spotlight-color: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(6, 182, 212, 0.14) 0%, rgba(236, 72, 153, 0.06) 40%, transparent 70%);
+      --badge-gradient: linear-gradient(135deg, #06b6d4, #ec4899);
+    }
+
+    [data-theme="velvet"] {
+      --primary: #e11d48;
+      --primary-glow: rgba(225, 29, 72, 0.5);
+      --accent: #fbbf24;
+      --accent-glow: rgba(251, 191, 36, 0.35);
+      --border-glow: rgba(225, 29, 72, 0.35);
+      --spotlight-color: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(225, 29, 72, 0.15) 0%, rgba(136, 19, 55, 0.08) 50%, transparent 75%);
+      --badge-gradient: linear-gradient(135deg, #e11d48, #9f1239);
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      background-color: #080D1A;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
       overflow-x: hidden;
-      font-family: 'Jua', sans-serif;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 50, 255, 0.15), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(245, 158, 11, 0.05), transparent);
+    }
+
+    /* Ambient Spotlight overlay */
+    .spotlight-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      background: var(--spotlight-color);
+      z-index: 1;
+      transition: background 0.1s ease-out;
+    }
+
+    /* Film grain subtle texture */
+    .film-grain {
+      position: fixed;
+      inset: 0;
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 2;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* ==========================================================
+       NAVBAR & CONTROLS
+       ========================================================== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(7, 9, 14, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.85rem 2rem;
+    }
+
+    .nav-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(239, 68, 68, 0.3));
+      border: 1px solid var(--border-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 1.35rem;
+      letter-spacing: 0.05em;
+      background: linear-gradient(120deg, #fff 40%, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-subtitle {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a.active {
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Theme Switcher Pills */
+    .theme-switcher {
+      display: flex;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .theme-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 5px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .theme-btn.active {
+      background: var(--primary);
+      color: #07090e;
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    /* Sound Effect Button */
+    .audio-toggle-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .audio-toggle-btn:hover {
+      background: var(--primary-glow);
+      border-color: var(--primary);
+    }
+
+    .btn-fdfs {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #080d1a;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 20px var(--primary-glow);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-fdfs:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--primary-glow);
+    }
+
+    /* ==========================================================
+       HERO CINEMATIC STAGE
+       ========================================================== */
+    .hero-section {
+      position: relative;
+      padding: 3.5rem 1.5rem 5rem;
+      max-width: 1360px;
+      margin: 0 auto;
+      z-index: 10;
+    }
+
+    .hero-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto 3rem;
+    }
+
+    .marquee-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.4rem 1.1rem;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid var(--border-glow);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(8px);
+      animation: pulseGlow 2.5s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 10px transparent; }
+      50% { box-shadow: 0 0 25px var(--primary-glow); }
+    }
+
+    .marquee-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-title span.cinema-glow {
+      background: linear-gradient(135deg, #fff 20%, var(--primary) 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 35px var(--primary-glow);
+    }
+
+    .hero-title span.gaming-pulse {
+      color: #fff;
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      font-weight: 400;
+      max-width: 680px;
+      margin: 0 auto 2.2rem;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Live FDFS Counter / Ticker */
+    .fdfs-ticker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ticker-value {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* ==========================================================
+       CINEMATIC 3D HERO SLIDER / STAGE
+       ========================================================== */
+    .slider-stage-container {
+      position: relative;
+      margin-top: 2rem;
+      perspective: 1200px;
+    }
+
+    .projector-beam {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 180px;
+      background: radial-gradient(ellipse at 50% 0%, var(--primary-glow) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0.6;
+      filter: blur(30px);
+      z-index: 1;
+    }
+
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 520px;
+      padding: 2rem 0;
+    }
+
+    .carousel-card {
+      position: absolute;
+      width: min(850px, 92vw);
+      height: 480px;
+      border-radius: 24px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      overflow: hidden;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      backdrop-filter: blur(20px);
+      user-select: none;
+    }
+
+    @media (max-width: 860px) {
+      .carousel-card {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: 540px;
+      }
+    }
+
+    /* Carousel Positioning Classes */
+    .carousel-card.active {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 1;
+      z-index: 20;
+      border-color: var(--border-glow);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 35px var(--primary-glow);
+    }
+
+    .carousel-card.prev {
+      transform: translate3d(-240px, 0, -180px) scale(0.85) rotateY(12deg);
+      opacity: 0.45;
+      z-index: 10;
+      filter: brightness(0.6);
+      pointer-events: auto;
+    }
+
+    .carousel-card.next {
+      transform: translate3d(240px, 0, -180px) scale(0.85) rotateY(-12deg);
+      opacity: 0.45;
+      z-index: 10;
+      filter: brightness(0.6);
+      pointer-events: auto;
+    }
+
+    .carousel-card.hidden {
+      transform: translate3d(0, 0, -350px) scale(0.7);
+      opacity: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Card Visuals (Left side) */
+    .card-media {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0d111c;
+    }
+
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .carousel-card:hover .card-media img {
+      transform: scale(1.04);
+    }
+
+    .media-overlay-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 55%, var(--bg-dark) 100%),
+                  linear-gradient(to top, rgba(7, 9, 14, 0.8) 0%, transparent 60%);
+    }
+
+    .film-strip-edge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 24px;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.15) 0px,
+        rgba(255, 255, 255, 0.15) 12px,
+        transparent 12px,
+        transparent 20px
+      );
+      z-index: 5;
+      opacity: 0.6;
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 6;
+    }
+
+    /* Card Content (Right side) */
+    .card-content {
+      padding: 2.5rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      background: linear-gradient(135deg, rgba(16, 21, 33, 0.95), rgba(9, 12, 19, 0.98));
+    }
+
+    .card-genre {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.78rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+      margin: 0.4rem 0 0.8rem;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .stat-val {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-action-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Slider Controls */
+    .carousel-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .nav-arrow {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: all 0.25s;
+    }
+
+    .nav-arrow:hover {
+      background: var(--primary);
+      color: #07090e;
+      border-color: var(--primary);
+      transform: scale(1.08);
+    }
+
+    .slider-dots {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .dot {
+      width: 32px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary-glow);
+      width: 48px;
+    }
+
+    /* ==========================================================
+       INTERACTIVE ON-PAGE MINI GAME (THE HOOK)
+       ========================================================== */
+    .mini-game-section {
+      max-width: 1100px;
+      margin: 4.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .mini-game-box {
+      background: linear-gradient(135deg, rgba(20, 26, 42, 0.9), rgba(11, 14, 23, 0.95));
+      border: 1px solid var(--border-glow);
+      border-radius: 28px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .box-badge {
+      position: absolute;
+      top: 0;
+      right: 40px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      padding: 6px 18px 8px;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+
+    .mini-game-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .mini-game-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 2rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .quiz-dialogue {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 1.8rem;
+      line-height: 1.5;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .quiz-dialogue mark {
+      background: transparent;
+      color: var(--primary);
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quiz-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #f1f5f9;
+      padding: 1.1rem 1.4rem;
+      border-radius: 14px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+
+    .quiz-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .quiz-btn.correct {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: #10b981;
+      color: #34d399;
+    }
+
+    .quiz-btn.wrong {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      color: #f87171;
+    }
+
+    .quiz-feedback {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      min-height: 32px;
+    }
+
+    /* ==========================================================
+       FOUR GAME MODES GRID
+       ========================================================== */
+    .modes-section {
+      max-width: 1320px;
+      margin: 5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-title-wrap {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-eyebrow {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 3.8vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .modes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .mode-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 2.2rem 1.8rem;
+      transition: all 0.35s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(14px);
+    }
+
+    .mode-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-glow);
+      background: var(--bg-card-hover);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px var(--primary-glow);
+    }
+
+    .mode-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 1.4rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .mode-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .mode-desc {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .mode-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================
+       VIP GOLDEN TICKET GENERATOR (EARLY ACCESS PASS)
+       ========================================================== */
+    .ticket-section {
+      max-width: 1200px;
+      margin: 6rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .ticket-stage {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3rem;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(16, 21, 33, 0.85), rgba(8, 11, 18, 0.95));
+      border: 1px solid var(--border-glow);
+      border-radius: 28px;
+      padding: 3.5rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+
+    @media (max-width: 960px) {
+      .ticket-stage {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 1.5rem;
+      }
+    }
+
+    .ticket-info h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .ticket-info p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-bottom: 2rem;
+    }
+
+    .ticket-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-input {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 0.85rem 1.1rem;
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.25s;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    /* THE RETRO-GOLDEN CINEMA TICKET STUB */
+    .golden-ticket {
+      background: linear-gradient(135deg, #1e1b18 0%, #2b2219 50%, #16120e 100%);
+      border: 2px solid #d4af37;
+      border-radius: 18px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.35);
+      position: relative;
+      display: flex;
+      overflow: hidden;
+      min-height: 240px;
+      color: #f5f5f5;
+    }
+
+    /* Perforated edge tear notch */
+    .golden-ticket::before {
+      content: '';
+      position: absolute;
+      top: -14px;
+      right: 90px;
+      width: 28px;
+      height: 28px;
+      background: var(--bg-dark);
+      border-radius: 50%;
+      border-bottom: 2px solid #d4af37;
+      z-index: 10;
+    }
+
+    .golden-ticket::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      right: 90px;
+      width: 28px;
+      height: 28px;
+      background: var(--bg-dark);
+      border-radius: 50%;
+      border-top: 2px solid #d4af37;
+      z-index: 10;
+    }
+
+    .ticket-body {
+      flex: 1;
+      padding: 2rem 2.2rem;
+      border-right: 2px dashed rgba(212, 175, 55, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .ticket-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ticket-org {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: #e5c158;
+      font-weight: 700;
+    }
+
+    .ticket-admit {
+      font-size: 0.72rem;
+      background: #d4af37;
+      color: #12100e;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 800;
+    }
+
+    .ticket-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #fff;
+      margin: 0.6rem 0 0.2rem;
+    }
+
+    .ticket-user-display {
+      font-size: 1.1rem;
+      color: #fcd34d;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .ticket-details-row {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      text-transform: uppercase;
+    }
+
+    .ticket-details-row b {
+      color: #fff;
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    .ticket-stub {
+      width: 90px;
+      padding: 1.5rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .ticket-barcode {
+      writing-mode: vertical-lr;
+      font-family: monospace;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: #d4af37;
+      opacity: 0.8;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .barcode-lines {
+      width: 32px;
+      height: 80px;
+      background: repeating-linear-gradient(
+        to bottom,
+        #d4af37 0px,
+        #d4af37 2px,
+        transparent 2px,
+        transparent 4px,
+        #d4af37 4px,
+        #d4af37 8px,
+        transparent 8px,
+        transparent 10px
+      );
+    }
+
+    /* ==========================================================
+       FOOTER
+       ========================================================== */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: #040609;
+      padding: 4rem 2rem 2.5rem;
+      margin-top: 6rem;
+    }
+
+    .footer-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Micro animations & UI Toast */
+    .toast-popup {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(18, 22, 34, 0.95);
+      border: 1px solid var(--primary);
+      padding: 1rem 1.6rem;
+      border-radius: 12px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px var(--primary-glow);
+      z-index: 1000;
+      transform: translateY(120px);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    .toast-popup.visible {
+      transform: translateY(0);
+      opacity: 1;
     }
   </style>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+
+  <!-- Film Grain & Ambient Cursor Spotlight -->
+  <div class="film-grain"></div>
+  <div class="spotlight-overlay" id="spotlightOverlay"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <div class="brand-icon-box">🎬</div>
+        <div>
+          <div class="brand-title">BILET</div>
+          <div class="brand-subtitle">Kollywood Games</div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#showcase" class="active">Featured Games</a></li>
+        <li><a href="#minigame">Quick Quiz</a></li>
+        <li><a href="#modes">Game Vault</a></li>
+        <li><a href="#vipticket">VIP FDFS Pass</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Interactive Theme Mood Switcher -->
+        <div class="theme-switcher" title="Switch UI Lighting Mood">
+          <button class="theme-btn active" data-theme-val="gold" onclick="switchTheme('gold')">🌟 Gold</button>
+          <button class="theme-btn" data-theme-val="neon" onclick="switchTheme('neon')">⚡ Cyber</button>
+          <button class="theme-btn" data-theme-val="velvet" onclick="switchTheme('velvet')">🎭 Velvet</button>
+        </div>
+
+        <!-- Cinema Audio Atmosphere Synthesizer -->
+        <button class="audio-toggle-btn" id="audioToggleBtn" title="Toggle Cinema Whistle & Applause FX" onclick="toggleAudioFx()">
+          🔊
+        </button>
+
+        <a href="#vipticket" class="btn-fdfs">
+          <span>Get Early Access</span>
+          <span>🎟️</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN HERO SECTION -->
+  <main>
+    <section class="hero-section" id="showcase">
+      <div class="hero-header">
+        <div class="marquee-badge">
+          <span class="marquee-dot"></span>
+          <span>Where Tamil Cinema 🎬 Meets Ultimate Gaming 🎮</span>
+        </div>
+
+        <h1 class="hero-title">
+          Step Onto The <span class="cinema-glow">70mm Big Screen</span><br>
+          Play Your Favorite <span class="gaming-pulse">Kollywood Battles</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          From Annamalai dialogues to Vikram bgms — test your cinema quotient in real-time PVP battles, trivia arenas, and nostalgic audio quests.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#minigame" class="btn-fdfs" onclick="playWhistleSound()">
+            <span>Enter The Arena (FDFS)</span>
+            <span>⚡</span>
+          </a>
+          <button class="btn-secondary" onclick="playProjectorHum(); document.getElementById('modes').scrollIntoView({behavior: 'smooth'});">
+            <span>Explore 4 Game Modes</span>
+            <span>🕹️</span>
+          </button>
+        </div>
+
+        <!-- Realtime Ticker -->
+        <div class="fdfs-ticker">
+          <div class="ticker-item">
+            <span class="ticker-value">12,480+</span> Cinephiles Joined
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-value">540+</span> Tamil Blockbusters
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-value">100%</span> Mass Entertainment
+          </div>
+        </div>
+      </div>
+
+      <!-- CINEMATIC 3D SLIDER STAGE -->
+      <div class="slider-stage-container">
+        <div class="projector-beam"></div>
+
+        <div class="carousel-track" id="carouselTrack">
+          
+          <!-- Slide 1: Bilet Cinema Quiz -->
+          <div class="carousel-card active" data-index="0" onclick="selectSlide(0)">
+            <div class="card-media">
+              <div class="film-strip-edge"></div>
+              <span class="card-tag">🔥 Trending Mode</span>
+              <img src="assets/designs/card_quiz.jpg" alt="Bilet Cinema Quiz Artwork">
+              <div class="media-overlay-gradient"></div>
+            </div>
+            <div class="card-content">
+              <div>
+                <span class="card-genre">Trivia & Box Office</span>
+                <h2 class="card-title">Bilet Cinema Quiz: 100-Crore Clash</h2>
+                <p class="card-desc">
+                  Rapid-fire quiz challenges spanning 5 decades of Tamil cinema. From Shivaji Ganesan classics to Lokesh Cinematic Universe lore.
+                </p>
+                <div class="card-stats">
+                  <div>
+                    <div class="stat-label">Difficulty</div>
+                    <div class="stat-val">Mass ⭐⭐⭐</div>
+                  </div>
+                  <div>
+                    <div class="stat-label">Match Time</div>
+                    <div class="stat-val">3 Mins</div>
+                  </div>
+                  <div>
+                    <div class="stat-label">Players</div>
+                    <div class="stat-val">1v1 PVP</div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-action-bar">
+                <button class="btn-fdfs" onclick="event.stopPropagation(); triggerPlayDemo('Bilet Cinema Quiz');">Play Preview</button>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">🏆 Win Kollywood Badges</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Audio & Dialogue Battle -->
+          <div class="carousel-card next" data-index="1" onclick="selectSlide(1)">
+            <div class="card-media">
+              <div class="film-strip-edge"></div>
+              <span class="card-tag">🎧 Soundclash</span>
+              <img src="assets/designs/card_audio.jpg" alt="Kollywood Audio Battle Artwork">
+              <div class="media-overlay-gradient"></div>
+            </div>
+            <div class="card-content">
+              <div>
+                <span class="card-genre">Soundtrack & Voice</span>
+                <h2 class="card-title">Audio & Dialogue Decryptor</h2>
+                <p class="card-desc">
+                  Identify legendary Ilaiyaraaja preludes, AR Rahman beats, and Anirudh drops within 2 seconds. Or mimic punch dialogues for score multipliers!
+                </p>
+                <div class="card-stats">
+                  <div>
+                    <div class="stat-label">Audio Library</div>
+                    <div class="stat-val">2,500+ BGM</div>
+                  </div>
+                  <div>
+                    <div class="stat-label">Format</div>
+                    <div class="stat-val">Sound Wave</div>
+                  </div>
+                  <div>
+                    <div class="stat-label">Reward</div>
+                    <div class="stat-val">Gold Cassette</div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-action-bar">
+                <button class="btn-fdfs" onclick="event.stopPropagation(); triggerPlayDemo('Audio Decryptor');">Listen & Guess</button>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">⚡ Whistle Podu Mode</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Mass Intro Cinematic Stage -->
+          <div class="carousel-card hidden" data-index="2" onclick="selectSlide(2)">
+            <div class="card-media">
+              <div class="film-strip-edge"></div>
+              <span class="card-tag">👑 Premiere Event</span>
+              <img src="assets/designs/hero_cinema.jpg" alt="Cinema Premiere Hero Artwork">
+              <div class="media-overlay-gradient"></div>
+            </div>
+            <div class="card-content">
+              <div>
+                <span class="card-genre">Interactive Story Mode</span>
+                <h2 class="card-title">FDFS Mass Hero Showdown</h2>
+                <p class="card-desc">
+                  Build your dream film crew, navigate release day box-office controversies, and unlock legendary intro scene sequences.
+                </p>
+                <div class="card-stats">
+                  <div>
+                    <div class="stat-label">Genre</div>
+                    <div class="stat-val">Sim / RPG</div>
+                  </div>
+                  <div>
+                    <div class="stat-label">Stars</div>
+                    <div class="stat-val">Top Stars</div>
+                  </div>
+                  <div>
+                    <div class="stat-label">Status</div>
+                    <div class="stat-val">VIP Early</div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-action-bar">
+                <button class="btn-fdfs" onclick="event.stopPropagation(); triggerPlayDemo('Mass Hero Showdown');">Join Early Access</button>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">🎟️ Limited Seats</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Slider Navigation Controls -->
+        <div class="carousel-nav">
+          <button class="nav-arrow" onclick="prevSlide()" aria-label="Previous Slide">←</button>
+          <div class="slider-dots" id="sliderDots">
+            <span class="dot active" onclick="selectSlide(0)"></span>
+            <span class="dot" onclick="selectSlide(1)"></span>
+            <span class="dot" onclick="selectSlide(2)"></span>
+          </div>
+          <button class="nav-arrow" onclick="nextSlide()" aria-label="Next Slide">→</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE LIVE QUIZ CHALLENGE (Instant Engagement) -->
+    <section class="mini-game-section" id="minigame">
+      <div class="mini-game-box">
+        <span class="box-badge">Live Interactive Demo</span>
+
+        <div class="mini-game-header">
+          <h2 class="mini-game-title">Prove Your Kollywood IQ Right Now</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Answer this instant punch dialogue trivia to claim your FDFS Fan Badge.
+          </p>
+        </div>
+
+        <div class="quiz-card">
+          <div class="quiz-dialogue">
+            "நான் ஒரு தடவ சொன்னா... <mark>நூறு தடவ சொன்ன மாதிரி!</mark>"<br>
+            <span style="font-size: 0.95rem; font-weight: 400; color: #94a3b8; display: block; margin-top: 6px;">
+              Which iconic Tamil blockbuster made this dialogue immortal?
+            </span>
+          </div>
+
+          <div class="quiz-options">
+            <button class="quiz-btn" onclick="checkQuizAnswer(this, false, 'Padayappa')">
+              <span>A) Padayappa (1999)</span>
+              <span>🎬</span>
+            </button>
+            <button class="quiz-btn" onclick="checkQuizAnswer(this, true, 'Baashha')">
+              <span>B) Baashha (1995)</span>
+              <span>⭐</span>
+            </button>
+            <button class="quiz-btn" onclick="checkQuizAnswer(this, false, 'Annamalai')">
+              <span>C) Annamalai (1992)</span>
+              <span>🎥</span>
+            </button>
+            <button class="quiz-btn" onclick="checkQuizAnswer(this, false, 'Muthu')">
+              <span>D) Muthu (1995)</span>
+              <span>🌟</span>
+            </button>
+          </div>
+
+          <div class="quiz-feedback" id="quizFeedback"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUR GAME MODES SHOWCASE -->
+    <section class="modes-section" id="modes">
+      <div class="section-title-wrap">
+        <span class="section-eyebrow">Endless Entertainment</span>
+        <h2 class="section-title">Explore The Kollywood Games Universe</h2>
+      </div>
+
+      <div class="modes-grid">
+        <!-- Mode 1 -->
+        <div class="mode-card">
+          <div>
+            <div class="mode-icon">🎯</div>
+            <h3 class="mode-name">Cinema Quiz Battles</h3>
+            <p class="mode-desc">
+              Live multiplayer quiz matches. Guess director cameos, song lyric continuations, and box office records against friends or global players.
+            </p>
+          </div>
+          <div class="mode-meta">
+            <span>⚔️ 1v1 & 4-Player Battle</span>
+            <span style="color: var(--primary);">Real-time Ranking</span>
+          </div>
+        </div>
+
+        <!-- Mode 2 -->
+        <div class="mode-card">
+          <div>
+            <div class="mode-icon">📻</div>
+            <h3 class="mode-name">Nostalgia Audio Vault</h3>
+            <p class="mode-desc">
+              Hear 1.5-second snippets of Tamil instrumental interludes, flute solos, and synth riffs. Race the countdown timer to identify the composer!
+            </p>
+          </div>
+          <div class="mode-meta">
+            <span>🎵 5,000+ Tamil Tracks</span>
+            <span style="color: var(--primary);">High Fidelity FX</span>
+          </div>
+        </div>
+
+        <!-- Mode 3 -->
+        <div class="mode-card">
+          <div>
+            <div class="mode-icon">🧩</div>
+            <h3 class="mode-name">Poster & Frame Puzzle</h3>
+            <p class="mode-desc">
+              Scrambled movie posters and zoomed-in cinematographic frames. Scratch the digital silver screen to uncover the movie title.
+            </p>
+          </div>
+          <div class="mode-meta">
+            <span>🖼️ 4K Restored Frames</span>
+            <span style="color: var(--primary);">Daily Streaks</span>
+          </div>
+        </div>
+
+        <!-- Mode 4 -->
+        <div class="mode-card">
+          <div>
+            <div class="mode-icon">🏆</div>
+            <h3 class="mode-name">Kodambakkam Leaderboard</h3>
+            <p class="mode-desc">
+              Climb from "Balcony Rasigan" to "Superstar Tier". Earn exclusive movie merchandise, premier tickets, and Discord VIP flair.
+            </p>
+          </div>
+          <div class="mode-meta">
+            <span>👑 Weekly Cash Prizes</span>
+            <span style="color: var(--primary);">Hall of Fame</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIP GOLDEN TICKET GENERATOR -->
+    <section class="ticket-section" id="vipticket">
+      <div class="ticket-stage">
+        <div class="ticket-info">
+          <span style="color: var(--primary); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;">VIP Early Access</span>
+          <h3>Claim Your FDFS Premiere Ticket</h3>
+          <p>
+            Personalize your golden cinema pass. Get exclusive early access to mobile betas, private tournaments, and founder rewards.
+          </p>
+
+          <form class="ticket-form" onsubmit="event.preventDefault(); updateTicketLive();">
+            <div class="form-group">
+              <label for="userNameInput">Your Cinephile Name</label>
+              <input type="text" id="userNameInput" class="form-input" placeholder="e.g. Thalapathy_Dinesh or Anirudh_Fan" value="Superstar Cinephile" oninput="updateTicketLive()">
+            </div>
+
+            <div class="form-group">
+              <label for="userSeatInput">Favorite Cinema Seat</label>
+              <input type="text" id="userSeatInput" class="form-input" placeholder="e.g. Balcony Row D-12" value="Balcony VIP A-07" oninput="updateTicketLive()">
+            </div>
+
+            <button type="submit" class="btn-fdfs" style="width: 100%; justify-content: center; margin-top: 0.5rem;" onclick="generateTicketAlert()">
+              <span>Generate VIP Pass & Register</span>
+              <span>🎫</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Dynamic Photorealistic Golden Cinema Ticket -->
+        <div class="golden-ticket" id="goldenTicketDisplay">
+          <div class="ticket-body">
+            <div class="ticket-top-row">
+              <span class="ticket-org">BILET CINEMA PASS</span>
+              <span class="ticket-admit">ADMIT ONE • FDFS</span>
+            </div>
+
+            <div>
+              <div class="ticket-main-title">KOLLYWOOD GAMES</div>
+              <div class="ticket-user-display" id="ticketUserNameDisplay">Superstar Cinephile</div>
+            </div>
+
+            <div class="ticket-details-row">
+              <div>
+                <span>SEAT NO</span>
+                <b id="ticketSeatDisplay">A-07 BALCONY</b>
+              </div>
+              <div>
+                <span>STATUS</span>
+                <b style="color: #34d399;">VIP CONFIRMED</b>
+              </div>
+              <div>
+                <span>DATE</span>
+                <b>PREMIERE 2026</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket-stub">
+            <span style="font-size: 0.65rem; color: #e5c158; font-weight: 700;">BILET</span>
+            <div class="barcode-lines"></div>
+            <div class="ticket-barcode">FDFS-88921</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="brand-logo">
+          <div class="brand-icon-box">🎬</div>
+          <div>
+            <div class="brand-title">BILET</div>
+            <div class="brand-subtitle">Kollywood Games</div>
+          </div>
+        </div>
+
+        <div style="color: var(--text-muted); font-size: 0.9rem; max-width: 450px;">
+          Crafted with passion for Tamil cinema lovers worldwide. Celebrating the timeless magic of Kollywood through interactive gaming.
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Bilet Kollywood Games. All rights reserved.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+          <a href="#" style="color: var(--text-muted); text-decoration: none;">Terms of Play</a>
+          <a href="#" style="color: var(--text-muted); text-decoration: none;">Discord Community</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Toast Notification -->
+  <div class="toast-popup" id="toastPopup">
+    <span id="toastIcon">✨</span>
+    <span id="toastMessage">Welcome to Bilet Kollywood Games!</span>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC & INTERACTIONS -->
+  <script>
+    /* ==========================================================
+       SPOTLIGHT CURSOR INTERACTION
+       ========================================================== */
+    const overlay = document.getElementById('spotlightOverlay');
+    window.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      document.documentElement.style.setProperty('--mouse-x', `${x}%`);
+      document.documentElement.style.setProperty('--mouse-y', `${y}%`);
+    });
+
+    /* ==========================================================
+       THEME SWITCHER (GOLD, CYBER, VELVET)
+       ========================================================== */
+    function switchTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-theme-val') === themeName);
+      });
+      showToast(`Switched lighting to ${themeName.toUpperCase()} mood 🎬`, '🎭');
+      playTone(themeName === 'neon' ? 880 : (themeName === 'velvet' ? 330 : 520));
+    }
+
+    /* ==========================================================
+       CAROUSEL 3D SLIDER LOGIC
+       ========================================================== */
+    let currentSlide = 0;
+    const cards = document.querySelectorAll('.carousel-card');
+    const dots = document.querySelectorAll('.dot');
+    const totalSlides = cards.length;
+
+    function updateCarousel() {
+      cards.forEach((card, idx) => {
+        card.classList.remove('active', 'prev', 'next', 'hidden');
+        if (idx === currentSlide) {
+          card.classList.add('active');
+        } else if (idx === (currentSlide - 1 + totalSlides) % totalSlides) {
+          card.classList.add('prev');
+        } else if (idx === (currentSlide + 1) % totalSlides) {
+          card.classList.add('next');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentSlide);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+      playTone(440);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+      playTone(390);
+    }
+
+    function selectSlide(index) {
+      currentSlide = index;
+      updateCarousel();
+      playTone(480);
+    }
+
+    // Auto rotate every 8 seconds
+    let slideTimer = setInterval(nextSlide, 8000);
+    document.querySelector('.slider-stage-container').addEventListener('mouseenter', () => clearInterval(slideTimer));
+    document.querySelector('.slider-stage-container').addEventListener('mouseleave', () => {
+      clearInterval(slideTimer);
+      slideTimer = setInterval(nextSlide, 8000);
+    });
+
+    /* ==========================================================
+       PLAYABLE INSTANT MINI-QUIZ
+       ========================================================== */
+    let quizAnswered = false;
+    function checkQuizAnswer(button, isCorrect, title) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+
+      const feedback = document.getElementById('quizFeedback');
+      const allBtns = document.querySelectorAll('.quiz-options .quiz-btn');
+
+      if (isCorrect) {
+        button.classList.add('correct');
+        feedback.innerHTML = `<span style="color: #34d399;">🔥 MASS! Baashha (1995) is 100% Correct! You earned the 'Thalaivar Fan' Badge 🎖️</span>`;
+        showToast("Mass Answer! 500 Coins added to your Pass! 🪙", "🏆");
+        playWhistleSound();
+      } else {
+        button.classList.add('wrong');
+        allBtns[1].classList.add('correct'); // Highlight Baashha
+        feedback.innerHTML = `<span style="color: #f87171;">Ayyo! Correct answer is Superstar's <strong>Baashha (1995)</strong>. Try the next round!</span>`;
+        showToast("Nice try! Baashha was the one!", "🎬");
+        playTone(220);
+      }
+    }
+
+    /* ==========================================================
+       VIP PASS LIVE GENERATOR
+       ========================================================== */
+    function updateTicketLive() {
+      const nameInput = document.getElementById('userNameInput').value.trim() || 'Superstar Cinephile';
+      const seatInput = document.getElementById('userSeatInput').value.trim() || 'Balcony VIP A-07';
+
+      document.getElementById('ticketUserNameDisplay').textContent = nameInput;
+      document.getElementById('ticketSeatDisplay').textContent = seatInput.toUpperCase();
+    }
+
+    function generateTicketAlert() {
+      showToast("🎟️ FDFS VIP Pass Confirmed! Welcome to Kollywood Games!", "✨");
+      playWhistleSound();
+      
+      const ticket = document.getElementById('goldenTicketDisplay');
+      ticket.style.transform = 'scale(1.03)';
+      setTimeout(() => ticket.style.transform = 'scale(1)', 300);
+    }
+
+    function triggerPlayDemo(gameTitle) {
+      showToast(`Loading demo for ${gameTitle}... Ready to roll!`, "🎮");
+      playTone(660);
+    }
+
+    /* ==========================================================
+       WEB AUDIO API SYNTHESIZER (No external sound files required)
+       ========================================================== */
+    let audioCtx = null;
+    let audioEnabled = true;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq) {
+      if (!audioEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.35);
+      } catch (e) {
+        console.log("Audio not allowed yet");
+      }
+    }
+
+    function playWhistleSound() {
+      if (!audioEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        // Cinematic upward whistle glide
+        osc.frequency.setValueAtTime(1200, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(2400, ctx.currentTime + 0.25);
+        osc.frequency.exponentialRampToValueAtTime(1800, ctx.currentTime + 0.45);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.5);
+      } catch (e) {}
+    }
+
+    function playProjectorHum() {
+      if (!audioEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(60, ctx.currentTime);
+        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.6);
+      } catch (e) {}
+    }
+
+    function toggleAudioFx() {
+      audioEnabled = !audioEnabled;
+      const btn = document.getElementById('audioToggleBtn');
+      btn.textContent = audioEnabled ? '🔊' : '🔇';
+      showToast(audioEnabled ? 'Sound FX Enabled 🎶' : 'Sound FX Muted 🔇', audioEnabled ? '🔊' : '🔇');
+    }
+
+    /* ==========================================================
+       TOAST POPUP HELPER
+       ========================================================== */
+    let toastTimeout;
+    function showToast(message, icon = '✨') {
+      const toast = document.getElementById('toastPopup');
+      const msgEl = document.getElementById('toastMessage');
+      const iconEl = document.getElementById('toastIcon');
+
+      msgEl.textContent = message;
+      iconEl.textContent = icon;
+      toast.classList.add('visible');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('visible');
+      }, 3500);
+    }
+  </script>
 </body>
 </html>
