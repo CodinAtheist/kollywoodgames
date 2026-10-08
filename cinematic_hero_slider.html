@@ -2,14 +2,18 @@
 <html lang="ta-IN" data-theme="gold">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Bilet Kollywood Games | Where Cinema Meets Gaming 🎬🎮</title>
   <meta name="description" content="Experience Bilet Kollywood Games: The world's first cinematic gaming universe for Tamil movie fans. Quiz battles, audio duels, nostalgia vaults & VIP FDFS passes.">
 
-  <!-- Google Fonts: Cinzel, Outfit, Jua -->
+  <!-- Favicon & Icons -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Google Fonts: Cinzel, Outfit, Jua, Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Jua&family=Outfit:wght@300;400;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Jua&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================
@@ -17,8 +21,8 @@
        ========================================================== */
     :root {
       --bg-dark: #07090e;
-      --bg-card: rgba(18, 22, 34, 0.75);
-      --bg-card-hover: rgba(26, 32, 50, 0.9);
+      --bg-card: rgba(14, 18, 30, 0.82);
+      --bg-card-hover: rgba(22, 28, 46, 0.92);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       
@@ -27,7 +31,7 @@
       --primary-glow: rgba(245, 158, 11, 0.45);
       --accent: #ef4444;
       --accent-glow: rgba(239, 68, 68, 0.35);
-      --border-glow: rgba(245, 158, 11, 0.3);
+      --border-glow: rgba(245, 158, 11, 0.35);
       --spotlight-color: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(245, 158, 11, 0.12) 0%, rgba(239, 68, 68, 0.04) 40%, transparent 70%);
       --badge-gradient: linear-gradient(135deg, #f59e0b, #d97706);
     }
@@ -38,7 +42,7 @@
       --accent: #ec4899;
       --accent-glow: rgba(236, 72, 153, 0.4);
       --border-glow: rgba(6, 182, 212, 0.35);
-      --spotlight-color: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(6, 182, 212, 0.14) 0%, rgba(236, 72, 153, 0.06) 40%, transparent 70%);
+      --spotlight-color: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(6, 182, 212, 0.15) 0%, rgba(236, 72, 153, 0.06) 40%, transparent 70%);
       --badge-gradient: linear-gradient(135deg, #06b6d4, #ec4899);
     }
 
@@ -48,15 +52,19 @@
       --accent: #fbbf24;
       --accent-glow: rgba(251, 191, 36, 0.35);
       --border-glow: rgba(225, 29, 72, 0.35);
-      --spotlight-color: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(225, 29, 72, 0.15) 0%, rgba(136, 19, 55, 0.08) 50%, transparent 75%);
+      --spotlight-color: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 40%), rgba(225, 29, 72, 0.16) 0%, rgba(136, 19, 55, 0.08) 50%, transparent 75%);
       --badge-gradient: linear-gradient(135deg, #e11d48, #9f1239);
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -65,13 +73,58 @@
       font-family: 'Outfit', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
+      width: 100%;
       line-height: 1.6;
-      background-image: 
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 50, 255, 0.15), transparent),
-        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(245, 158, 11, 0.05), transparent);
+      position: relative;
     }
 
-    /* Ambient Spotlight overlay */
+    /* ==========================================================
+       RESPONSIVE CINEMATIC BACKGROUND SYSTEM
+       Desktop Background + Mobile Background Fallback
+       ========================================================== */
+    .cinema-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background-image: 
+        linear-gradient(180deg, 
+          rgba(7, 9, 14, 0.88) 0%, 
+          rgba(7, 9, 14, 0.76) 35%, 
+          rgba(7, 9, 14, 0.88) 75%, 
+          #07090e 100%
+        ),
+        radial-gradient(ellipse 90% 60% at 50% -10%, rgba(245, 158, 11, 0.12), transparent),
+        url('assets/assets/desktop_background.png');
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Mobile & Tablet Responsive Background Swap */
+    @media (max-width: 768px) {
+      .cinema-backdrop {
+        background-image: 
+          linear-gradient(180deg, 
+            rgba(7, 9, 14, 0.90) 0%, 
+            rgba(7, 9, 14, 0.82) 40%, 
+            rgba(7, 9, 14, 0.94) 85%, 
+            #07090e 100%
+          ),
+          url('assets/assets/mobile_background.png');
+        background-attachment: scroll; /* Fixes iOS Safari mobile viewport jitter */
+        background-position: center top;
+        background-size: cover;
+      }
+    }
+
+    /* Ambient Cursor Spotlight */
     .spotlight-overlay {
       position: fixed;
       top: 0;
@@ -81,10 +134,10 @@
       pointer-events: none;
       background: var(--spotlight-color);
       z-index: 1;
-      transition: background 0.1s ease-out;
+      transition: background 0.15s ease-out;
     }
 
-    /* Film grain subtle texture */
+    /* Subtle Film Grain Texture */
     .film-grain {
       position: fixed;
       inset: 0;
@@ -95,17 +148,18 @@
     }
 
     /* ==========================================================
-       NAVBAR & CONTROLS
+       RESPONSIVE NAVBAR & HEADER
        ========================================================== */
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       background: rgba(7, 9, 14, 0.85);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 0.85rem 2rem;
+      padding: 0.75rem 1.5rem;
+      width: 100%;
     }
 
     .nav-container {
@@ -114,7 +168,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     .brand-logo {
@@ -123,35 +177,31 @@
       gap: 0.75rem;
       text-decoration: none;
       color: #fff;
+      flex-shrink: 0;
     }
 
-    .brand-icon-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(239, 68, 68, 0.3));
-      border: 1px solid var(--border-glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      box-shadow: 0 0 20px var(--primary-glow);
+    .brand-logo-img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px var(--primary-glow));
     }
 
     .brand-title {
       font-family: 'Cinzel', serif;
       font-weight: 900;
-      font-size: 1.35rem;
-      letter-spacing: 0.05em;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
       background: linear-gradient(120deg, #fff 40%, var(--primary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      line-height: 1.1;
     }
 
     .brand-subtitle {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
-      letter-spacing: 0.15em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       font-family: 'Space Grotesk', sans-serif;
     }
@@ -166,24 +216,21 @@
     .nav-links a {
       color: #cbd5e1;
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 500;
       transition: all 0.25s ease;
-      position: relative;
+      white-space: nowrap;
     }
 
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .nav-links a.active {
+    .nav-links a:hover, .nav-links a.active {
       color: var(--primary);
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
+      flex-shrink: 0;
     }
 
     /* Theme Switcher Pills */
@@ -193,42 +240,41 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 999px;
       padding: 3px;
-      gap: 3px;
+      gap: 2px;
     }
 
     .theme-btn {
       background: none;
       border: none;
       color: var(--text-muted);
-      padding: 5px 12px;
-      font-size: 0.78rem;
+      padding: 4px 10px;
+      font-size: 0.75rem;
       font-weight: 600;
       border-radius: 999px;
       cursor: pointer;
       transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+      white-space: nowrap;
     }
 
     .theme-btn.active {
       background: var(--primary);
       color: #07090e;
-      box-shadow: 0 0 12px var(--primary-glow);
+      box-shadow: 0 0 10px var(--primary-glow);
     }
 
-    /* Sound Effect Button */
+    /* Sound Button */
     .audio-toggle-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #fff;
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      font-size: 1rem;
       transition: all 0.2s;
     }
 
@@ -241,30 +287,60 @@
       background: linear-gradient(135deg, var(--primary), var(--accent));
       color: #080d1a;
       font-weight: 700;
-      font-size: 0.88rem;
-      padding: 0.65rem 1.4rem;
+      font-size: 0.85rem;
+      padding: 0.6rem 1.25rem;
       border-radius: 10px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 20px var(--primary-glow);
+      gap: 0.45rem;
+      box-shadow: 0 4px 18px var(--primary-glow);
       transition: transform 0.2s, box-shadow 0.2s;
       border: none;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .btn-fdfs:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px var(--primary-glow);
+      box-shadow: 0 8px 25px var(--primary-glow);
+    }
+
+    /* Mobile Nav Bar adjustments */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 580px) {
+      header {
+        padding: 0.6rem 1rem;
+      }
+      .brand-title {
+        font-size: 1.1rem;
+      }
+      .brand-subtitle {
+        display: none;
+      }
+      .theme-btn {
+        padding: 4px 7px;
+        font-size: 0.7rem;
+      }
+      .btn-fdfs span:first-child {
+        display: none;
+      }
+      .btn-fdfs {
+        padding: 0.55rem 0.8rem;
+      }
     }
 
     /* ==========================================================
-       HERO CINEMATIC STAGE
+       HERO CINEMATIC SECTION
        ========================================================== */
     .hero-section {
       position: relative;
-      padding: 3.5rem 1.5rem 5rem;
+      padding: 3rem 1.5rem 4rem;
       max-width: 1360px;
       margin: 0 auto;
       z-index: 10;
@@ -273,23 +349,23 @@
     .hero-header {
       text-align: center;
       max-width: 860px;
-      margin: 0 auto 3rem;
+      margin: 0 auto 2.5rem;
     }
 
     .marquee-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      padding: 0.4rem 1.1rem;
-      background: rgba(245, 158, 11, 0.1);
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      background: rgba(245, 158, 11, 0.12);
       border: 1px solid var(--border-glow);
       border-radius: 999px;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 600;
       color: var(--primary);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.25rem;
       backdrop-filter: blur(8px);
       animation: pulseGlow 2.5s infinite;
     }
@@ -315,11 +391,11 @@
 
     .hero-title {
       font-family: 'Cinzel', serif;
-      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-size: clamp(2rem, 5vw, 4.2rem);
       font-weight: 900;
-      line-height: 1.1;
+      line-height: 1.15;
       letter-spacing: -0.01em;
-      margin-bottom: 1.3rem;
+      margin-bottom: 1.2rem;
     }
 
     .hero-title span.cinema-glow {
@@ -329,40 +405,35 @@
       text-shadow: 0 0 35px var(--primary-glow);
     }
 
-    .hero-title span.gaming-pulse {
-      color: #fff;
-      position: relative;
-      display: inline-block;
-    }
-
     .hero-subtitle {
-      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
       color: var(--text-muted);
       font-weight: 400;
-      max-width: 680px;
-      margin: 0 auto 2.2rem;
+      max-width: 660px;
+      margin: 0 auto 2rem;
+      padding: 0 0.5rem;
     }
 
     .hero-cta-group {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1.25rem;
+      gap: 1rem;
       flex-wrap: wrap;
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       color: #fff;
       font-weight: 600;
-      font-size: 0.95rem;
-      padding: 0.75rem 1.6rem;
+      font-size: 0.92rem;
+      padding: 0.7rem 1.4rem;
       border-radius: 10px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
       transition: all 0.25s ease;
       cursor: pointer;
     }
@@ -373,22 +444,35 @@
       transform: translateY(-2px);
     }
 
-    /* Live FDFS Counter / Ticker */
+    @media (max-width: 480px) {
+      .hero-cta-group {
+        flex-direction: column;
+        width: 100%;
+      }
+      .hero-cta-group .btn-fdfs,
+      .hero-cta-group .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Live Ticker */
     .fdfs-ticker {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 2rem;
+      gap: 1.5rem;
       margin-top: 2rem;
       color: #cbd5e1;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-family: 'Space Grotesk', sans-serif;
+      flex-wrap: wrap;
     }
 
     .ticker-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
     .ticker-value {
@@ -397,25 +481,27 @@
     }
 
     /* ==========================================================
-       CINEMATIC 3D HERO SLIDER / STAGE
+       CINEMATIC 3D SLIDER STAGE
+       Fully Responsive Across Desktop, Tablet & Mobile
        ========================================================== */
     .slider-stage-container {
       position: relative;
       margin-top: 2rem;
       perspective: 1200px;
+      width: 100%;
     }
 
     .projector-beam {
       position: absolute;
-      top: -120px;
+      top: -100px;
       left: 50%;
       transform: translateX(-50%);
-      width: 70%;
-      height: 180px;
+      width: 80%;
+      height: 160px;
       background: radial-gradient(ellipse at 50% 0%, var(--primary-glow) 0%, transparent 70%);
       pointer-events: none;
-      opacity: 0.6;
-      filter: blur(30px);
+      opacity: 0.55;
+      filter: blur(35px);
       z-index: 1;
     }
 
@@ -424,17 +510,18 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      min-height: 520px;
-      padding: 2rem 0;
+      min-height: 500px;
+      padding: 1.5rem 0;
+      width: 100%;
     }
 
     .carousel-card {
       position: absolute;
-      width: min(850px, 92vw);
-      height: 480px;
+      width: min(850px, 94vw);
+      height: 470px;
       border-radius: 24px;
       background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
       transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
       overflow: hidden;
@@ -442,18 +529,11 @@
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       user-select: none;
     }
 
-    @media (max-width: 860px) {
-      .carousel-card {
-        grid-template-columns: 1fr;
-        height: auto;
-        min-height: 540px;
-      }
-    }
-
-    /* Carousel Positioning Classes */
+    /* 3D Depth Positioning */
     .carousel-card.active {
       transform: translate3d(0, 0, 0) scale(1);
       opacity: 1;
@@ -485,7 +565,7 @@
       pointer-events: none;
     }
 
-    /* Card Visuals (Left side) */
+    /* Media Left Side */
     .card-media {
       position: relative;
       overflow: hidden;
@@ -493,6 +573,7 @@
       align-items: center;
       justify-content: center;
       background: #0d111c;
+      min-height: 220px;
     }
 
     .card-media img {
@@ -509,8 +590,8 @@
     .media-overlay-gradient {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, transparent 55%, var(--bg-dark) 100%),
-                  linear-gradient(to top, rgba(7, 9, 14, 0.8) 0%, transparent 60%);
+      background: linear-gradient(to right, transparent 50%, var(--bg-card) 100%),
+                  linear-gradient(to top, rgba(7, 9, 14, 0.85) 0%, transparent 60%);
     }
 
     .film-strip-edge {
@@ -518,7 +599,7 @@
       top: 0;
       left: 0;
       height: 100%;
-      width: 24px;
+      width: 22px;
       background: repeating-linear-gradient(
         to bottom,
         rgba(255, 255, 255, 0.15) 0px,
@@ -532,15 +613,15 @@
 
     .card-tag {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 6px 14px;
+      top: 16px;
+      left: 16px;
+      padding: 5px 12px;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff;
@@ -550,9 +631,9 @@
       z-index: 6;
     }
 
-    /* Card Content (Right side) */
+    /* Content Right Side */
     .card-content {
-      padding: 2.5rem 2.2rem;
+      padding: 2.2rem 2rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -562,7 +643,7 @@
 
     .card-genre {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--primary);
       text-transform: uppercase;
       letter-spacing: 0.15em;
@@ -571,38 +652,38 @@
 
     .card-title {
       font-family: 'Cinzel', serif;
-      font-size: 1.85rem;
+      font-size: 1.7rem;
       font-weight: 800;
       color: #fff;
       line-height: 1.25;
-      margin: 0.4rem 0 0.8rem;
+      margin: 0.3rem 0 0.6rem;
     }
 
     .card-desc {
       color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin-bottom: 1.25rem;
     }
 
     .card-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      padding: 1rem 0;
+      gap: 0.5rem;
+      padding: 0.85rem 0;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .stat-label {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       color: var(--text-muted);
       text-transform: uppercase;
     }
 
     .stat-val {
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       font-weight: 700;
       color: #fff;
     }
@@ -611,29 +692,66 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    /* Slider Controls */
+    /* Slider Responsive Transformation */
+    @media (max-width: 860px) {
+      .carousel-track {
+        min-height: 600px;
+      }
+      .carousel-card {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: 560px;
+      }
+      .media-overlay-gradient {
+        background: linear-gradient(to top, var(--bg-card) 10%, transparent 80%);
+      }
+      .card-content {
+        padding: 1.5rem 1.4rem;
+      }
+      .card-title {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .carousel-track {
+        min-height: 560px;
+      }
+      .carousel-card.prev, 
+      .carousel-card.next {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.85);
+      }
+      .carousel-card.active {
+        width: 100%;
+      }
+    }
+
+    /* Slider Navigation Controls */
     .carousel-nav {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-top: 1.5rem;
     }
 
     .nav-arrow {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       transition: all 0.25s;
     }
 
@@ -641,16 +759,16 @@
       background: var(--primary);
       color: #07090e;
       border-color: var(--primary);
-      transform: scale(1.08);
+      transform: scale(1.06);
     }
 
     .slider-dots {
       display: flex;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
     .dot {
-      width: 32px;
+      width: 28px;
       height: 6px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.2);
@@ -661,40 +779,51 @@
     .dot.active {
       background: var(--primary);
       box-shadow: 0 0 10px var(--primary-glow);
-      width: 48px;
+      width: 44px;
     }
 
     /* ==========================================================
-       INTERACTIVE ON-PAGE MINI GAME (THE HOOK)
+       INTERACTIVE PLAYABLE MINI GAME
        ========================================================== */
     .mini-game-section {
       max-width: 1100px;
       margin: 4.5rem auto;
       padding: 0 1.5rem;
+      position: relative;
+      z-index: 10;
     }
 
     .mini-game-box {
-      background: linear-gradient(135deg, rgba(20, 26, 42, 0.9), rgba(11, 14, 23, 0.95));
+      background: linear-gradient(135deg, rgba(20, 26, 42, 0.92), rgba(11, 14, 23, 0.96));
       border: 1px solid var(--border-glow);
-      border-radius: 28px;
-      padding: 3rem;
+      border-radius: 26px;
+      padding: 3rem 2.5rem;
       position: relative;
       overflow: hidden;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    @media (max-width: 640px) {
+      .mini-game-box {
+        padding: 2.2rem 1.25rem 1.75rem;
+        border-radius: 20px;
+      }
     }
 
     .box-badge {
       position: absolute;
       top: 0;
-      right: 40px;
+      right: 30px;
       background: var(--accent);
       color: #fff;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
-      padding: 6px 18px 8px;
-      border-bottom-left-radius: 12px;
-      border-bottom-right-radius: 12px;
+      letter-spacing: 0.08em;
+      padding: 5px 14px 7px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
       text-transform: uppercase;
       box-shadow: 0 4px 15px var(--accent-glow);
     }
@@ -702,33 +831,38 @@
     .mini-game-header {
       text-align: center;
       max-width: 600px;
-      margin: 0 auto 2.5rem;
+      margin: 0 auto 2rem;
     }
 
     .mini-game-title {
       font-family: 'Cinzel', serif;
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 3.5vw, 2.1rem);
       color: #fff;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .quiz-card {
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(0, 0, 0, 0.38);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 18px;
-      padding: 2rem;
+      padding: 1.8rem;
       max-width: 760px;
       margin: 0 auto;
     }
 
+    @media (max-width: 480px) {
+      .quiz-card {
+        padding: 1.2rem;
+      }
+    }
+
     .quiz-dialogue {
-      font-size: 1.35rem;
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
       font-weight: 700;
       color: #fff;
       text-align: center;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.6rem;
       line-height: 1.5;
-      font-family: 'Outfit', sans-serif;
     }
 
     .quiz-dialogue mark {
@@ -739,7 +873,7 @@
     .quiz-options {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+      gap: 0.85rem;
     }
 
     @media (max-width: 640px) {
@@ -749,12 +883,12 @@
     }
 
     .quiz-btn {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: #f1f5f9;
-      padding: 1.1rem 1.4rem;
+      padding: 1rem 1.25rem;
       border-radius: 14px;
-      font-size: 0.98rem;
+      font-size: 0.94rem;
       font-weight: 600;
       text-align: left;
       cursor: pointer;
@@ -771,178 +905,186 @@
     }
 
     .quiz-btn.correct {
-      background: rgba(16, 185, 129, 0.2);
+      background: rgba(16, 185, 129, 0.22);
       border-color: #10b981;
       color: #34d399;
     }
 
     .quiz-btn.wrong {
-      background: rgba(239, 68, 68, 0.2);
+      background: rgba(239, 68, 68, 0.22);
       border-color: #ef4444;
       color: #f87171;
     }
 
     .quiz-feedback {
       text-align: center;
-      margin-top: 1.5rem;
+      margin-top: 1.25rem;
       font-weight: 700;
-      font-size: 1.1rem;
-      min-height: 32px;
+      font-size: 1rem;
+      min-height: 28px;
     }
 
     /* ==========================================================
-       FOUR GAME MODES GRID
+       FOUR GAME MODES MATRIX
        ========================================================== */
     .modes-section {
       max-width: 1320px;
       margin: 5rem auto;
       padding: 0 1.5rem;
+      position: relative;
+      z-index: 10;
     }
 
     .section-title-wrap {
       text-align: center;
-      margin-bottom: 3.5rem;
+      margin-bottom: 3rem;
     }
 
     .section-eyebrow {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--primary);
       text-transform: uppercase;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       font-weight: 700;
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .section-title {
       font-family: 'Cinzel', serif;
-      font-size: clamp(2rem, 3.8vw, 2.8rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.7rem);
       font-weight: 800;
       color: #fff;
     }
 
     .modes-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 1.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.5rem;
     }
 
     .mode-card {
       background: var(--bg-card);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 20px;
-      padding: 2.2rem 1.8rem;
+      padding: 2rem 1.6rem;
       transition: all 0.35s ease;
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
     .mode-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
       border-color: var(--border-glow);
       background: var(--bg-card-hover);
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px var(--primary-glow);
     }
 
     .mode-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 16px;
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
       background: rgba(255, 255, 255, 0.06);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      margin-bottom: 1.4rem;
+      font-size: 1.7rem;
+      margin-bottom: 1.25rem;
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     }
 
     .mode-name {
       font-family: 'Cinzel', serif;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
 
     .mode-desc {
       color: var(--text-muted);
       font-size: 0.88rem;
       line-height: 1.6;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.4rem;
     }
 
     .mode-meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 1rem;
+      padding-top: 0.85rem;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-muted);
     }
 
     /* ==========================================================
-       VIP GOLDEN TICKET GENERATOR (EARLY ACCESS PASS)
+       RESPONSIVE VIP GOLDEN TICKET GENERATOR
+       Flawless on Desktop, Tablet & Mobile Devices
        ========================================================== */
     .ticket-section {
       max-width: 1200px;
-      margin: 6rem auto;
+      margin: 5.5rem auto;
       padding: 0 1.5rem;
+      position: relative;
+      z-index: 10;
     }
 
     .ticket-stage {
       display: grid;
       grid-template-columns: 1fr 1.1fr;
-      gap: 3rem;
+      gap: 2.5rem;
       align-items: center;
-      background: linear-gradient(135deg, rgba(16, 21, 33, 0.85), rgba(8, 11, 18, 0.95));
+      background: linear-gradient(135deg, rgba(16, 21, 33, 0.90), rgba(8, 11, 18, 0.96));
       border: 1px solid var(--border-glow);
-      border-radius: 28px;
-      padding: 3.5rem;
+      border-radius: 26px;
+      padding: 3rem;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
       position: relative;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     @media (max-width: 960px) {
       .ticket-stage {
         grid-template-columns: 1fr;
-        padding: 2.5rem 1.5rem;
+        padding: 2.2rem 1.5rem;
       }
     }
 
     .ticket-info h3 {
       font-family: 'Cinzel', serif;
-      font-size: 2.2rem;
+      font-size: clamp(1.8rem, 3.5vw, 2.2rem);
       color: #fff;
-      margin-bottom: 1rem;
+      margin-bottom: 0.85rem;
     }
 
     .ticket-info p {
       color: var(--text-muted);
-      font-size: 0.98rem;
-      margin-bottom: 2rem;
+      font-size: 0.92rem;
+      margin-bottom: 1.75rem;
     }
 
     .ticket-form {
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 1rem;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.35rem;
     }
 
     .form-group label {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: #cbd5e1;
       text-transform: uppercase;
@@ -950,13 +1092,13 @@
     }
 
     .form-input {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 12px;
-      padding: 0.85rem 1.1rem;
+      padding: 0.8rem 1rem;
       color: #fff;
       font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       outline: none;
       transition: border-color 0.25s;
     }
@@ -966,7 +1108,7 @@
       box-shadow: 0 0 15px var(--primary-glow);
     }
 
-    /* THE RETRO-GOLDEN CINEMA TICKET STUB */
+    /* THE GOLDEN CINEMA TICKET STUB */
     .golden-ticket {
       background: linear-gradient(135deg, #1e1b18 0%, #2b2219 50%, #16120e 100%);
       border: 2px solid #d4af37;
@@ -975,19 +1117,21 @@
       position: relative;
       display: flex;
       overflow: hidden;
-      min-height: 240px;
+      min-height: 230px;
       color: #f5f5f5;
+      width: 100%;
+      transition: transform 0.3s;
     }
 
-    /* Perforated edge tear notch */
+    /* Desktop Notch Tear */
     .golden-ticket::before {
       content: '';
       position: absolute;
       top: -14px;
-      right: 90px;
+      right: 85px;
       width: 28px;
       height: 28px;
-      background: var(--bg-dark);
+      background: #080d1a;
       border-radius: 50%;
       border-bottom: 2px solid #d4af37;
       z-index: 10;
@@ -997,10 +1141,10 @@
       content: '';
       position: absolute;
       bottom: -14px;
-      right: 90px;
+      right: 85px;
       width: 28px;
       height: 28px;
-      background: var(--bg-dark);
+      background: #080d1a;
       border-radius: 50%;
       border-top: 2px solid #d4af37;
       z-index: 10;
@@ -1008,7 +1152,7 @@
 
     .ticket-body {
       flex: 1;
-      padding: 2rem 2.2rem;
+      padding: 1.8rem 2rem;
       border-right: 2px dashed rgba(212, 175, 55, 0.4);
       display: flex;
       flex-direction: column;
@@ -1019,69 +1163,74 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 0.5rem;
     }
 
     .ticket-org {
       font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       letter-spacing: 0.15em;
       color: #e5c158;
       font-weight: 700;
     }
 
     .ticket-admit {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       background: #d4af37;
       color: #12100e;
       padding: 2px 8px;
       border-radius: 4px;
       font-weight: 800;
+      white-space: nowrap;
     }
 
     .ticket-main-title {
       font-family: 'Cinzel', serif;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 900;
       color: #fff;
-      margin: 0.6rem 0 0.2rem;
+      margin: 0.5rem 0 0.1rem;
     }
 
     .ticket-user-display {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: #fcd34d;
       font-weight: 700;
       font-family: 'Space Grotesk', sans-serif;
+      word-break: break-word;
     }
 
     .ticket-details-row {
       display: flex;
-      gap: 2rem;
-      margin-top: 1rem;
-      font-size: 0.75rem;
+      gap: 1.5rem;
+      margin-top: 0.85rem;
+      font-size: 0.72rem;
       color: #cbd5e1;
       text-transform: uppercase;
+      flex-wrap: wrap;
     }
 
     .ticket-details-row b {
       color: #fff;
       display: block;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .ticket-stub {
-      width: 90px;
-      padding: 1.5rem 0.5rem;
+      width: 85px;
+      padding: 1.25rem 0.4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.35);
+      flex-shrink: 0;
     }
 
     .ticket-barcode {
       writing-mode: vertical-lr;
       font-family: monospace;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       letter-spacing: 3px;
       color: #d4af37;
       opacity: 0.8;
@@ -1091,19 +1240,68 @@
     }
 
     .barcode-lines {
-      width: 32px;
-      height: 80px;
+      width: 28px;
+      height: 75px;
       background: repeating-linear-gradient(
         to bottom,
-        #d4af37 0px,
-        #d4af37 2px,
-        transparent 2px,
-        transparent 4px,
-        #d4af37 4px,
-        #d4af37 8px,
-        transparent 8px,
-        transparent 10px
+        #d4af37 0px, #d4af37 2px,
+        transparent 2px, transparent 4px,
+        #d4af37 4px, #d4af37 8px,
+        transparent 8px, transparent 10px
       );
+    }
+
+    /* Mobile Responsive Adaptation for Golden Ticket */
+    @media (max-width: 580px) {
+      .golden-ticket {
+        flex-direction: column;
+        min-height: auto;
+      }
+      .golden-ticket::before {
+        top: auto;
+        bottom: 74px;
+        left: -14px;
+        right: auto;
+        border-right: 2px solid #d4af37;
+        border-bottom: none;
+        border-top: none;
+      }
+      .golden-ticket::after {
+        top: auto;
+        bottom: 74px;
+        right: -14px;
+        border-left: 2px solid #d4af37;
+        border-top: none;
+        border-bottom: none;
+      }
+      .ticket-body {
+        border-right: none;
+        border-bottom: 2px dashed rgba(212, 175, 55, 0.4);
+        padding: 1.4rem 1.25rem;
+      }
+      .ticket-main-title {
+        font-size: 1.35rem;
+      }
+      .ticket-stub {
+        width: 100%;
+        flex-direction: row;
+        padding: 0.85rem 1.25rem;
+      }
+      .ticket-barcode {
+        writing-mode: horizontal-tb;
+        letter-spacing: 2px;
+      }
+      .barcode-lines {
+        width: 110px;
+        height: 22px;
+        background: repeating-linear-gradient(
+          to right,
+          #d4af37 0px, #d4af37 2px,
+          transparent 2px, transparent 4px,
+          #d4af37 4px, #d4af37 8px,
+          transparent 8px, transparent 10px
+        );
+      }
     }
 
     /* ==========================================================
@@ -1112,8 +1310,10 @@
     footer {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       background: #040609;
-      padding: 4rem 2rem 2.5rem;
-      margin-top: 6rem;
+      padding: 3.5rem 1.5rem 2.2rem;
+      margin-top: 5rem;
+      position: relative;
+      z-index: 10;
     }
 
     .footer-container {
@@ -1121,7 +1321,7 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 3rem;
+      gap: 2.5rem;
     }
 
     .footer-top {
@@ -1129,14 +1329,14 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: 1.75rem;
     }
 
     .footer-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 2rem;
+      padding-top: 1.8rem;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       font-size: 0.82rem;
       color: var(--text-muted);
@@ -1147,21 +1347,23 @@
     /* Micro animations & UI Toast */
     .toast-popup {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: 1.5rem;
+      right: 1.5rem;
       background: rgba(18, 22, 34, 0.95);
       border: 1px solid var(--primary);
-      padding: 1rem 1.6rem;
+      padding: 0.85rem 1.4rem;
       border-radius: 12px;
       color: #fff;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.75rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px var(--primary-glow);
       z-index: 1000;
       transform: translateY(120px);
       opacity: 0;
       transition: all 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      max-width: calc(100vw - 3rem);
+      font-size: 0.9rem;
     }
 
     .toast-popup.visible {
@@ -1172,15 +1374,18 @@
 </head>
 <body>
 
+  <!-- Responsive Cinematic Backdrop Image (Desktop & Mobile) -->
+  <div class="cinema-backdrop" id="cinemaBackdrop"></div>
+
   <!-- Film Grain & Ambient Cursor Spotlight -->
   <div class="film-grain"></div>
   <div class="spotlight-overlay" id="spotlightOverlay"></div>
 
-  <!-- HEADER -->
+  <!-- HEADER / NAVBAR -->
   <header>
     <div class="nav-container">
       <a href="#" class="brand-logo">
-        <div class="brand-icon-box">🎬</div>
+        <img src="assets/assets/kollywood_logo.png" alt="Kollywood Games Logo" class="brand-logo-img">
         <div>
           <div class="brand-title">BILET</div>
           <div class="brand-subtitle">Kollywood Games</div>
@@ -1202,14 +1407,15 @@
           <button class="theme-btn" data-theme-val="velvet" onclick="switchTheme('velvet')">🎭 Velvet</button>
         </div>
 
-        <!-- Cinema Audio Atmosphere Synthesizer -->
+        <!-- Cinema Audio FX Toggle -->
         <button class="audio-toggle-btn" id="audioToggleBtn" title="Toggle Cinema Whistle & Applause FX" onclick="toggleAudioFx()">
           🔊
         </button>
 
-        <a href="#vipticket" class="btn-fdfs">
-          <span>Get Early Access</span>
-          <span>🎟️</span>
+        <!-- Direct Link to Flutter App -->
+        <a href="flutter_app.html" class="btn-fdfs" title="Launch Kollywood Games">
+          <span>Play Game</span>
+          <span>🎮</span>
         </a>
       </div>
     </div>
@@ -1221,7 +1427,7 @@
       <div class="hero-header">
         <div class="marquee-badge">
           <span class="marquee-dot"></span>
-          <span>Where Tamil Cinema 🎬 Meets Ultimate Gaming 🎮</span>
+          <span>Where Tamil Cinema 🎬 Meets Gaming 🎮</span>
         </div>
 
         <h1 class="hero-title">
@@ -1230,16 +1436,16 @@
         </h1>
 
         <p class="hero-subtitle">
-          From Annamalai dialogues to Vikram bgms — test your cinema quotient in real-time PVP battles, trivia arenas, and nostalgic audio quests.
+          From Annamalai dialogues to Vikram bgms — test your cinema quotient in real-time battles, rapid trivia arenas, and nostalgic audio quests.
         </p>
 
         <div class="hero-cta-group">
-          <a href="#minigame" class="btn-fdfs" onclick="playWhistleSound()">
-            <span>Enter The Arena (FDFS)</span>
+          <a href="flutter_app.html" class="btn-fdfs" onclick="playWhistleSound()">
+            <span>Enter The Arena (Launch Game)</span>
             <span>⚡</span>
           </a>
-          <button class="btn-secondary" onclick="playProjectorHum(); document.getElementById('modes').scrollIntoView({behavior: 'smooth'});">
-            <span>Explore 4 Game Modes</span>
+          <button class="btn-secondary" onclick="playProjectorHum(); document.getElementById('minigame').scrollIntoView({behavior: 'smooth'});">
+            <span>Try Instant Quiz</span>
             <span>🕹️</span>
           </button>
         </div>
@@ -1259,7 +1465,7 @@
       </div>
 
       <!-- CINEMATIC 3D SLIDER STAGE -->
-      <div class="slider-stage-container">
+      <div class="slider-stage-container" id="sliderStage">
         <div class="projector-beam"></div>
 
         <div class="carousel-track" id="carouselTrack">
@@ -1277,7 +1483,7 @@
                 <span class="card-genre">Trivia & Box Office</span>
                 <h2 class="card-title">Bilet Cinema Quiz: 100-Crore Clash</h2>
                 <p class="card-desc">
-                  Rapid-fire quiz challenges spanning 5 decades of Tamil cinema. From Shivaji Ganesan classics to Lokesh Cinematic Universe lore.
+                  Rapid-fire quiz challenges spanning 5 decades of Tamil cinema. From Sivaji Ganesan classics to Lokesh Cinematic Universe lore.
                 </p>
                 <div class="card-stats">
                   <div>
@@ -1295,8 +1501,8 @@
                 </div>
               </div>
               <div class="card-action-bar">
-                <button class="btn-fdfs" onclick="event.stopPropagation(); triggerPlayDemo('Bilet Cinema Quiz');">Play Preview</button>
-                <span style="font-size: 0.85rem; color: var(--text-muted);">🏆 Win Kollywood Badges</span>
+                <a href="flutter_app.html" class="btn-fdfs" onclick="event.stopPropagation();">Play Preview</a>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">🏆 Win Kollywood Badges</span>
               </div>
             </div>
           </div>
@@ -1332,8 +1538,8 @@
                 </div>
               </div>
               <div class="card-action-bar">
-                <button class="btn-fdfs" onclick="event.stopPropagation(); triggerPlayDemo('Audio Decryptor');">Listen & Guess</button>
-                <span style="font-size: 0.85rem; color: var(--text-muted);">⚡ Whistle Podu Mode</span>
+                <a href="flutter_app.html" class="btn-fdfs" onclick="event.stopPropagation();">Listen & Guess</a>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">⚡ Whistle Podu Mode</span>
               </div>
             </div>
           </div>
@@ -1369,8 +1575,8 @@
                 </div>
               </div>
               <div class="card-action-bar">
-                <button class="btn-fdfs" onclick="event.stopPropagation(); triggerPlayDemo('Mass Hero Showdown');">Join Early Access</button>
-                <span style="font-size: 0.85rem; color: var(--text-muted);">🎟️ Limited Seats</span>
+                <a href="#vipticket" class="btn-fdfs" onclick="event.stopPropagation();">Join Early Access</a>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">🎟️ Limited Seats</span>
               </div>
             </div>
           </div>
@@ -1390,14 +1596,14 @@
       </div>
     </section>
 
-    <!-- INTERACTIVE LIVE QUIZ CHALLENGE (Instant Engagement) -->
+    <!-- INTERACTIVE LIVE QUIZ CHALLENGE -->
     <section class="mini-game-section" id="minigame">
       <div class="mini-game-box">
         <span class="box-badge">Live Interactive Demo</span>
 
         <div class="mini-game-header">
           <h2 class="mini-game-title">Prove Your Kollywood IQ Right Now</h2>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
+          <p style="color: var(--text-muted); font-size: 0.92rem;">
             Answer this instant punch dialogue trivia to claim your FDFS Fan Badge.
           </p>
         </div>
@@ -1405,7 +1611,7 @@
         <div class="quiz-card">
           <div class="quiz-dialogue">
             "நான் ஒரு தடவ சொன்னா... <mark>நூறு தடவ சொன்ன மாதிரி!</mark>"<br>
-            <span style="font-size: 0.95rem; font-weight: 400; color: #94a3b8; display: block; margin-top: 6px;">
+            <span style="font-size: 0.9rem; font-weight: 400; color: #94a3b8; display: block; margin-top: 6px;">
               Which iconic Tamil blockbuster made this dialogue immortal?
             </span>
           </div>
@@ -1525,7 +1731,7 @@
               <input type="text" id="userSeatInput" class="form-input" placeholder="e.g. Balcony Row D-12" value="Balcony VIP A-07" oninput="updateTicketLive()">
             </div>
 
-            <button type="submit" class="btn-fdfs" style="width: 100%; justify-content: center; margin-top: 0.5rem;" onclick="generateTicketAlert()">
+            <button type="submit" class="btn-fdfs" style="width: 100%; justify-content: center; margin-top: 0.4rem;" onclick="generateTicketAlert()">
               <span>Generate VIP Pass & Register</span>
               <span>🎫</span>
             </button>
@@ -1576,24 +1782,24 @@
     <div class="footer-container">
       <div class="footer-top">
         <div class="brand-logo">
-          <div class="brand-icon-box">🎬</div>
+          <img src="assets/assets/kollywood_logo.png" alt="Kollywood Games Logo" class="brand-logo-img">
           <div>
             <div class="brand-title">BILET</div>
             <div class="brand-subtitle">Kollywood Games</div>
           </div>
         </div>
 
-        <div style="color: var(--text-muted); font-size: 0.9rem; max-width: 450px;">
+        <div style="color: var(--text-muted); font-size: 0.88rem; max-width: 450px;">
           Crafted with passion for Tamil cinema lovers worldwide. Celebrating the timeless magic of Kollywood through interactive gaming.
         </div>
       </div>
 
       <div class="footer-bottom">
         <div>&copy; 2026 Bilet Kollywood Games. All rights reserved.</div>
-        <div style="display: flex; gap: 1.5rem;">
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
           <a href="#" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
           <a href="#" style="color: var(--text-muted); text-decoration: none;">Terms of Play</a>
-          <a href="#" style="color: var(--text-muted); text-decoration: none;">Discord Community</a>
+          <a href="flutter_app.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Play Flutter App →</a>
         </div>
       </div>
     </div>
@@ -1631,7 +1837,7 @@
     }
 
     /* ==========================================================
-       CAROUSEL 3D SLIDER LOGIC
+       CAROUSEL 3D SLIDER LOGIC + TOUCH SWIPE SUPPORT
        ========================================================== */
     let currentSlide = 0;
     const cards = document.querySelectorAll('.carousel-card');
@@ -1675,13 +1881,35 @@
       playTone(480);
     }
 
-    // Auto rotate every 8 seconds
+    // Auto rotate every 8 seconds (pauses on hover)
     let slideTimer = setInterval(nextSlide, 8000);
-    document.querySelector('.slider-stage-container').addEventListener('mouseenter', () => clearInterval(slideTimer));
-    document.querySelector('.slider-stage-container').addEventListener('mouseleave', () => {
-      clearInterval(slideTimer);
-      slideTimer = setInterval(nextSlide, 8000);
-    });
+    const sliderContainer = document.getElementById('sliderStage');
+    if (sliderContainer) {
+      sliderContainer.addEventListener('mouseenter', () => clearInterval(slideTimer));
+      sliderContainer.addEventListener('mouseleave', () => {
+        clearInterval(slideTimer);
+        slideTimer = setInterval(nextSlide, 8000);
+      });
+
+      // Mobile Touch Swipe Support
+      let touchStartX = 0;
+      let touchEndX = 0;
+      sliderContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      sliderContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const swipeDiff = touchEndX - touchStartX;
+        if (Math.abs(swipeDiff) > 45) {
+          if (swipeDiff < 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+      }, { passive: true });
+    }
 
     /* ==========================================================
        PLAYABLE INSTANT MINI-QUIZ
@@ -1724,17 +1952,12 @@
       playWhistleSound();
       
       const ticket = document.getElementById('goldenTicketDisplay');
-      ticket.style.transform = 'scale(1.03)';
+      ticket.style.transform = 'scale(1.02)';
       setTimeout(() => ticket.style.transform = 'scale(1)', 300);
     }
 
-    function triggerPlayDemo(gameTitle) {
-      showToast(`Loading demo for ${gameTitle}... Ready to roll!`, "🎮");
-      playTone(660);
-    }
-
     /* ==========================================================
-       WEB AUDIO API SYNTHESIZER (No external sound files required)
+       WEB AUDIO API SYNTHESIZER (No external audio files required)
        ========================================================== */
     let audioCtx = null;
     let audioEnabled = true;
@@ -1764,9 +1987,7 @@
         gain.connect(ctx.destination);
         osc.start();
         osc.stop(ctx.currentTime + 0.35);
-      } catch (e) {
-        console.log("Audio not allowed yet");
-      }
+      } catch (e) {}
     }
 
     function playWhistleSound() {
