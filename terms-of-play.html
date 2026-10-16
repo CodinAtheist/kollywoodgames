@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="gold">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Terms of Play | Bilet Kollywood Games Private Limited</title>
+  <meta name="description"
+    content="Official Terms of Play for Kollywood Games by Bilet Kollywood Games Private Limited. Rules of engagement, quiz tournament guidelines, and reward redemption terms.">
+
+  <!-- Favicon & Icons -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Jua&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root,
+    [data-theme="gold"] {
+      --bg-dark: #07090e;
+      --bg-surface: #0c0f17;
+      --bg-card: rgba(15, 19, 30, 0.85);
+      --bg-glass: rgba(18, 22, 34, 0.75);
+
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --primary: #f59e0b;
+      --primary-light: #fbbf24;
+      --primary-dark: #b45309;
+      --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #ffd700 50%, #d97706 100%);
+      --gold-border: rgba(245, 158, 11, 0.3);
+
+      --font-display: 'Cinzel', serif;
+      --font-body: 'Outfit', sans-serif;
+      --font-mono: 'Space Grotesk', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    .bg-beam {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.12) 0%, transparent 60%);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--gold-border);
+      padding: 1rem 1.5rem;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-logo {
+      height: 42px;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-back-btn {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s ease;
+    }
+
+    .nav-back-btn:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 3rem auto 6rem;
+      padding: 0 1.5rem;
+    }
+
+    .terms-hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .terms-hero h1 {
+      font-family: var(--font-display);
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(180deg, #ffffff 40%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .terms-content {
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .terms-section {
+      margin-bottom: 2.8rem;
+    }
+
+    .terms-section h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+      padding-bottom: 0.5rem;
+    }
+
+    .terms-section p, .terms-section li {
+      color: #cbd5e1;
+      font-size: 0.98rem;
+    }
+
+    .terms-section ul {
+      margin-left: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      border-top: 1px solid rgba(245, 158, 11, 0.2);
+      background: #040609;
+      padding: 3rem 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-beam"></div>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="brand-link">
+        <img src="assets/assets/kollywood_logo.png" alt="Kollywood Games Logo" class="brand-logo" onerror="this.style.display='none'">
+        <span class="brand-title">KOLLYWOOD GAMES</span>
+      </a>
+      <a href="index.html" class="nav-back-btn">← Back to Home</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="terms-hero">
+      <h1>Terms of Play</h1>
+      <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto;">
+        Guidelines and terms governing your gameplay, tournament rankings, and reward claims on Kollywood Games.
+      </p>
+    </section>
+
+    <article class="terms-content">
+      <section class="terms-section">
+        <h2>1. Acceptance of Terms</h2>
+        <p>
+          By downloading, installing, or engaging with <strong>Kollywood Games</strong>, developed and operated by <strong>BILET KOLLYWOOD GAMES PRIVATE LIMITED</strong>, you enter into a legally binding agreement to abide by these Terms of Play.
+        </p>
+      </section>
+
+      <section class="terms-section">
+        <h2>2. Fair Play & Anti-Cheat Policy</h2>
+        <p>Kollywood Games celebrates cinematic knowledge and quick reflex trivia. To protect honest players:</p>
+        <ul>
+          <li>Using automated response scripts, reverse-engineered APKs, memory editors, or emulator hooks is strictly forbidden.</li>
+          <li>Multiple accounts created by a single individual to manipulate referral bonuses or contest odds will result in immediate disqualification and forfeiture of reward tickets.</li>
+        </ul>
+      </section>
+
+      <section class="terms-section">
+        <h2>3. Movie Trivia & Intellectual Property Fair Use</h2>
+        <p>
+          Kollywood Games is an interactive fan trivia experience. All film titles, character names, dialogues, and music excerpts referenced within quiz questions are the intellectual property of their respective producers, copyright holders, and creators. They are used here strictly under statutory principles of fair use for entertainment, trivia, review, and cultural appreciation.
+        </p>
+      </section>
+
+      <section class="terms-section">
+        <h2>4. Rewards, Tickets & Contests</h2>
+        <p>
+          Players can earn in-game tickets and qualify for movie promotions (including FDFS movie tickets):
+        </p>
+        <ul>
+          <li>Reward tickets hold no direct cash redemption value except as explicitly stated in promotional events.</li>
+          <li>Theatre tickets and screening seat allocations are subject to theatre availability in participating Tamil Nadu districts.</li>
+          <li>BILET KOLLYWOOD GAMES PRIVATE LIMITED reserves the right to verify player identity and district residency before disbursing physical or digital screening passes.</li>
+        </ul>
+      </section>
+
+      <section class="terms-section">
+        <h2>5. In-App Purchases & Payments</h2>
+        <p>
+          In-app purchases and pass unlocks are processed securely via PhonePe. All digital goods take effect immediately in your player profile. For billing disputes or payment transaction errors, please contact <a href="mailto:support@kollywoodgames.com" style="color: var(--primary);">support@kollywoodgames.com</a> with your PhonePe Transaction ID.
+        </p>
+      </section>
+
+      <section class="terms-section">
+        <h2>6. Contact</h2>
+        <p>
+          <strong>BILET KOLLYWOOD GAMES PRIVATE LIMITED</strong><br>
+          SF NO 164/4A SITE NO 4, WEST, VINAYAGA GARDENS, Malumichampatti, Coimbatore - 641050, Tamil Nadu<br>
+          Email: <a href="mailto:support@kollywoodgames.com" style="color: var(--primary);">support@kollywoodgames.com</a>
+        </p>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div style="color: var(--text-dim); font-size: 0.9rem;">&copy; 2026 Bilet Kollywood Games Private Limited. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html" style="color: var(--primary);">Terms of Play</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
