@@ -948,6 +948,22 @@ a:hover { color: var(--ink); }
   font-size: 1.6rem;
 }
 
+.founder-photo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 18px;
+  object-fit: cover;
+  border: 3px solid var(--indigo);
+  border-radius: 50%;
+  box-shadow: 4px 4px 0 var(--pink);
+}
+
+.founder-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 22px;
+}
+
 .founder-role {
   display: inline-block;
   margin-bottom: 12px;
