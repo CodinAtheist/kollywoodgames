@@ -1,2680 +1,448 @@
 <!DOCTYPE html>
-<html lang="ta-IN" data-theme="gold">
+<html lang="en-IN">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Bilet Kollywood Games | Where Cinema Meets Gaming 🎬🎮</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kollywood Games | The mobile quiz game for Tamil cinema fans</title>
   <meta name="description"
-    content="Step onto the 70mm big screen with Bilet Kollywood Games: The ultimate arcade where Tamil cinema meets gaming. Battle in punch dialogue quiz duels, BGM decryptors & claim VIP FDFS passes.">
+    content="Kollywood Games is a free mobile quiz game for Tamil cinema fans. Play Enna Scene-uh: guess the movie from an illustrated scene, climb the leaderboard and win exciting weekly rewards. Coming soon on Google Play. Built by Bilet Kollywood Games Private Limited, Coimbatore.">
+  <meta name="theme-color" content="#1B1446">
+  <link rel="canonical" href="https://kollywoodgames.com/">
 
-  <!-- Favicon & Icons -->
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Kollywood Games">
+  <meta property="og:title" content="Kollywood Games | How well do you know Tamil cinema?">
+  <meta property="og:description"
+    content="A free mobile quiz game for Tamil cinema fans. Guess the movie from an illustrated scene, climb the leaderboard and win exciting weekly rewards. Coming soon on Google Play.">
+  <meta property="og:url" content="https://kollywoodgames.com/">
+  <meta property="og:image" content="https://kollywoodgames.com/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Kollywood Games: How well do you know Tamil cinema? Coming soon on Google Play.">
+  <meta property="og:locale" content="en_IN">
 
-  <!-- Google Fonts: Cinzel, Outfit, Space Grotesk, Jua -->
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kollywood Games | How well do you know Tamil cinema?">
+  <meta name="twitter:description"
+    content="A free mobile quiz game for Tamil cinema fans. Guess the movie, climb the leaderboard, win weekly rewards. Coming soon on Google Play.">
+  <meta name="twitter:image" content="https://kollywoodgames.com/images/og-image.png">
+  <meta name="twitter:image:alt" content="Kollywood Games: How well do you know Tamil cinema?">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <!-- Apply the saved theme before first paint -->
+  <script>
+    try { var t = localStorage.getItem("kg-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+  </script>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Jua&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Catamaran:wght@400;600;700;800&display=swap"
     rel="stylesheet">
 
-  <style>
-    /* ==========================================================
-       DESIGN SYSTEM & 70MM GOLD THEME TOKENS
-       Pure Luxury Cinema Obsidian & 24K Gold Arcade Palette
-       ========================================================== */
-    :root,
-    [data-theme="gold"] {
-      --bg-dark: #07090e;
-      --bg-surface: #0c0f17;
-      --bg-card: rgba(15, 19, 30, 0.82);
-      --bg-card-hover: rgba(22, 28, 44, 0.94);
-      --bg-glass: rgba(18, 22, 34, 0.65);
-
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-
-      /* Pure 70mm Gold Spectrum */
-      --primary: #f59e0b;
-      --primary-light: #fbbf24;
-      --primary-dark: #b45309;
-      --primary-glow: rgba(245, 158, 11, 0.45);
-      --primary-glow-soft: rgba(245, 158, 11, 0.15);
-
-      /* Cinema Accents */
-      --accent-red: #ef4444;
-      --accent-red-glow: rgba(239, 68, 68, 0.35);
-      --accent-green: #10b981;
-
-      --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #ffd700 50%, #d97706 100%);
-      --gold-border: rgba(245, 158, 11, 0.3);
-      --gold-border-bright: rgba(255, 215, 0, 0.65);
-
-      --font-display: 'Cinzel', serif;
-      --font-body: 'Outfit', sans-serif;
-      --font-mono: 'Space Grotesk', monospace;
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      min-height: 100vh;
-      overflow-x: hidden;
-      width: 100%;
-      line-height: 1.6;
-      position: relative;
-    }
-
-    /* ==========================================================
-       CINEMA BACKGROUND & PROJECTOR BEAM ATMOSPHERE
-       ========================================================== */
-    .cinema-backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(180deg,
-          rgba(7, 9, 14, 0.90) 0%,
-          rgba(7, 9, 14, 0.82) 40%,
-          rgba(7, 9, 14, 0.92) 80%,
-          #07090e 100%),
-        radial-gradient(ellipse 90% 50% at 50% 0%, rgba(245, 158, 11, 0.14), transparent 70%),
-        url('assets/assets/desktop_background.png');
-      background-position: center top;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
-    }
-
-    @media (max-width: 768px) {
-      .cinema-backdrop {
-        background-image:
-          linear-gradient(180deg,
-            rgba(7, 9, 14, 0.92) 0%,
-            rgba(7, 9, 14, 0.85) 40%,
-            rgba(7, 9, 14, 0.95) 85%,
-            #07090e 100%),
-          url('assets/assets/mobile_background.png');
-      }
-    }
-
-    /* Overhead Cinema Projector Light Cone */
-    .projector-light-cone {
-      position: fixed;
-      top: -150px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80vw;
-      height: 480px;
-      background: radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.16) 0%, rgba(245, 158, 11, 0.05) 45%, transparent 75%);
-      pointer-events: none;
-      z-index: 1;
-      filter: blur(40px);
-    }
-
-    /* Spotlight Cursor Layer */
-    .spotlight-cursor {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background: radial-gradient(circle 500px at var(--mouse-x, 50%) var(--mouse-y, 30%),
-          rgba(245, 158, 11, 0.06),
-          transparent 65%);
-      transition: background 0.1s ease;
-    }
-
-    /* Film Grain Subtle Overlay */
-    .film-grain {
-      position: fixed;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      opacity: 0.025;
-      background-image: radial-gradient(#fff 1px, transparent 1px);
-      background-size: 4px 4px;
-    }
-
-    /* ==========================================================
-       TOP NAVIGATION: CINE-ARCADE HUD
-       ========================================================== */
-    header {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      z-index: 100;
-      background: rgba(7, 9, 14, 0.82);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(245, 158, 11, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    .nav-container {
-      max-width: 1360px;
-      margin: 0 auto;
-      padding: 0.85rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.25rem;
-    }
-
-    .brand-link {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .brand-logo-img {
-      height: 44px;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 0 12px var(--primary-glow));
-      transition: transform 0.3s ease;
-    }
-
-    .brand-link:hover .brand-logo-img {
-      transform: scale(1.05) rotate(-2deg);
-    }
-
-    .brand-title-wrap {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-title {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.1;
-    }
-
-    .brand-tag {
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    /* Live Arcade Status Pill in Navbar */
-    .nav-live-indicator {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(245, 158, 11, 0.08);
-      border: 1px solid rgba(245, 158, 11, 0.25);
-      padding: 0.35rem 0.85rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      color: #fde68a;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .live-dot {
-      width: 7px;
-      height: 7px;
-      background: #10b981;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #10b981;
-      animation: pulseGreen 1.8s infinite;
-    }
-
-    @keyframes pulseGreen {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.4;
-        transform: scale(0.8);
-      }
-    }
-
-    /* Nav Links */
-    .nav-links {
-      display: flex;
-      list-style: none;
-      align-items: center;
-      gap: 1.75rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      transition: all 0.2s ease;
-      position: relative;
-      padding: 0.3rem 0;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #fff;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--gold-gradient);
-      transition: width 0.25s ease;
-      border-radius: 2px;
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-
-    /* Nav Action Group */
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-    }
-
-    .coin-badge {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(245, 158, 11, 0.12);
-      border: 1px solid var(--gold-border);
-      padding: 0.4rem 0.85rem;
-      border-radius: 999px;
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: #fde68a;
-    }
-
-    .btn-play-arena {
-      background: var(--gold-gradient);
-      color: #080d1a;
-      font-weight: 800;
-      font-size: 0.88rem;
-      padding: 0.55rem 1.35rem;
-      border-radius: 10px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 18px var(--primary-glow);
-      transition: all 0.25s ease;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      position: relative;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .btn-play-arena::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg,
-          transparent,
-          rgba(255, 255, 255, 0.35),
-          transparent);
-      transform: rotate(35deg) translateY(-100%);
-      transition: transform 0.6s ease;
-    }
-
-    .btn-play-arena:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(245, 158, 11, 0.65);
-    }
-
-    .btn-play-arena:hover::before {
-      transform: rotate(35deg) translateY(100%);
-    }
-
-    /* ==========================================================
-       HERO SECTION: 70MM CINEMA MEETS GAMING
-       ========================================================== */
-    .hero-section {
-      position: relative;
-      z-index: 3;
-      padding: 3.5rem 1.5rem 4.5rem;
-      max-width: 1360px;
-      margin: 0 auto;
-    }
-
-    .hero-header {
-      text-align: center;
-      max-width: 940px;
-      margin: 0 auto 3rem;
-    }
-
-    /* Arcade Marquee Pill */
-    .cinema-marquee-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: rgba(245, 158, 11, 0.09);
-      border: 1px solid var(--gold-border-bright);
-      padding: 0.45rem 1.25rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #ffd700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      box-shadow: 0 0 25px rgba(245, 158, 11, 0.2);
-      margin-bottom: 1.4rem;
-    }
-
-    .marquee-sparkle {
-      animation: rotateStar 3s linear infinite;
-      display: inline-block;
-    }
-
-    @keyframes rotateStar {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.3rem, 5.2vw, 4.3rem);
-      font-weight: 900;
-      line-height: 1.14;
-      margin-bottom: 1.3rem;
-      letter-spacing: -0.01em;
-      color: #ffffff;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-    }
-
-    .gold-gradient-text {
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.4));
-    }
-
-    .cinema-badge-glow {
-      display: inline-block;
-      position: relative;
-      color: #ffd700;
-      text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1rem, 1.4vw, 1.22rem);
-      color: var(--text-muted);
-      line-height: 1.65;
-      max-width: 780px;
-      margin: 0 auto 2.2rem;
-      font-weight: 400;
-    }
-
-    .hero-cta-group {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2.8rem;
-    }
-
-    .btn-secondary-cinema {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.92rem;
-      padding: 0.8rem 1.6rem;
-      border-radius: 10px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      backdrop-filter: blur(8px);
-      transition: all 0.25s ease;
-      text-decoration: none;
-    }
-
-    .btn-secondary-cinema:hover {
-      background: rgba(245, 158, 11, 0.12);
-      border-color: var(--primary);
-      color: #ffd700;
-      transform: translateY(-2px);
-    }
-
-    /* Live Stat Ticker Ribbon */
-    .hero-stats-ribbon {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.2rem;
-      background: rgba(14, 18, 30, 0.65);
-      border: 1px solid rgba(245, 158, 11, 0.2);
-      border-radius: 16px;
-      padding: 1.25rem 1.75rem;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-      max-width: 980px;
-      margin: 0 auto;
-    }
-
-    .stat-ribbon-item {
-      text-align: center;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 0 0.5rem;
-    }
-
-    .stat-ribbon-item:last-child {
-      border-right: none;
-    }
-
-    .stat-ribbon-num {
-      font-family: var(--font-mono);
-      font-size: 1.55rem;
-      font-weight: 700;
-      color: #ffd700;
-      line-height: 1.1;
-      margin-bottom: 0.25rem;
-    }
-
-    .stat-ribbon-label {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 600;
-    }
-
-    /* ==========================================================
-       FEATURED CINEMA GAME SLIDER (3D FILM-STRIP CARDS)
-       ========================================================== */
-    .slider-stage-wrapper {
-      position: relative;
-      margin-top: 3.5rem;
-    }
-
-    .slider-header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 1.6rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .section-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--primary);
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-    }
-
-    .section-heading-gold {
-      font-family: var(--font-display);
-      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.2;
-    }
-
-    .carousel-stage {
-      position: relative;
-      width: 100%;
-      height: 520px;
-      perspective: 1200px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .carousel-card {
-      position: absolute;
-      width: min(880px, 92%);
-      height: 480px;
-      border-radius: 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--gold-border);
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 158, 11, 0.15);
-      transition: all 0.65s cubic-bezier(0.25, 1, 0.5, 1);
-      cursor: pointer;
-      backdrop-filter: blur(20px);
-    }
-
-    .carousel-card.active {
-      transform: translate3d(0, 0, 0) scale(1);
-      opacity: 1;
-      z-index: 10;
-      pointer-events: auto;
-      border-color: var(--primary);
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 45px var(--primary-glow);
-    }
-
-    .carousel-card.prev {
-      transform: translate3d(-18%, 0, -120px) scale(0.88);
-      opacity: 0.45;
-      z-index: 5;
-      pointer-events: auto;
-      filter: blur(1.5px);
-    }
-
-    .carousel-card.next {
-      transform: translate3d(18%, 0, -120px) scale(0.88);
-      opacity: 0.45;
-      z-index: 5;
-      pointer-events: auto;
-      filter: blur(1.5px);
-    }
-
-    .carousel-card.hidden {
-      transform: translate3d(0, 40px, -220px) scale(0.75);
-      opacity: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* Card Media & 70mm Sprocket Details */
-    .card-media {
-      position: relative;
-      height: 100%;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .card-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s ease;
-    }
-
-    .carousel-card:hover .card-media img {
-      transform: scale(1.05);
-    }
-
-    /* Film Strip Perforation Top/Bottom Edge */
-    .film-strip-edge {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 14px;
-      z-index: 3;
-      background: repeating-linear-gradient(90deg,
-          rgba(0, 0, 0, 0.85) 0px,
-          rgba(0, 0, 0, 0.85) 6px,
-          rgba(245, 158, 11, 0.5) 6px,
-          rgba(245, 158, 11, 0.5) 12px,
-          rgba(0, 0, 0, 0.85) 12px,
-          rgba(0, 0, 0, 0.85) 18px);
-    }
-
-    .media-overlay-gradient {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg,
-          transparent 50%,
-          rgba(15, 19, 30, 0.95) 100%);
-    }
-
-    .card-tag {
-      position: absolute;
-      top: 22px;
-      left: 18px;
-      z-index: 4;
-      background: rgba(0, 0, 0, 0.75);
-      border: 1px solid var(--primary);
-      color: #ffd700;
-      font-size: 0.72rem;
-      font-weight: 800;
-      padding: 0.35rem 0.8rem;
-      border-radius: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      backdrop-filter: blur(8px);
-    }
-
-    /* Card Details */
-    .card-content {
-      padding: 2.2rem 2.2rem 1.8rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      z-index: 4;
-      background: linear-gradient(135deg, rgba(15, 19, 30, 0.95), rgba(9, 12, 20, 0.98));
-    }
-
-    .card-genre {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      margin-bottom: 0.4rem;
-      display: block;
-    }
-
-    .card-title {
-      font-family: var(--font-display);
-      font-size: 1.65rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 0.8rem;
-      line-height: 1.25;
-    }
-
-    .card-desc {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 1.3rem;
-    }
-
-    .card-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      padding: 0.75rem;
-      margin-bottom: 1.3rem;
-    }
-
-    .card-stat-box {
-      text-align: center;
-    }
-
-    .card-stat-label {
-      font-size: 0.68rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .card-stat-val {
-      font-family: var(--font-mono);
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: #ffd700;
-    }
-
-    .card-action-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    /* Carousel Nav Arrows & Indicator Dots */
-    .carousel-nav-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5rem;
-      margin-top: 1.8rem;
-    }
-
-    .nav-arrow-btn {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--gold-border);
-      color: #fff;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: all 0.25s ease;
-    }
-
-    .nav-arrow-btn:hover {
-      background: var(--primary);
-      color: #000;
-      box-shadow: 0 0 20px var(--primary-glow);
-      transform: scale(1.08);
-    }
-
-    .carousel-dots {
-      display: flex;
-      gap: 0.6rem;
-    }
-
-    .dot-pill {
-      width: 26px;
-      height: 5px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.2);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .dot-pill.active {
-      width: 46px;
-      background: var(--gold-gradient);
-      box-shadow: 0 0 12px var(--primary-glow);
-    }
-
-    /* ==========================================================
-       THE CROWN JEWEL: 70MM CINE-QUIZ ARENA (UNIQUE GAME-SHOW UI)
-       ========================================================== */
-    .quiz-arena-section {
-      position: relative;
-      z-index: 3;
-      padding: 5rem 1.5rem 5rem;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-
-    .quiz-console-frame {
-      background: linear-gradient(180deg, #101422 0%, #0a0d14 100%);
-      border: 2px solid var(--primary);
-      border-radius: 24px;
-      box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.9),
-        0 0 60px rgba(245, 158, 11, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* Clapperboard Top Bar */
-    .clapperboard-bar {
-      background: repeating-linear-gradient(-45deg,
-          #f59e0b 0px,
-          #f59e0b 16px,
-          #121624 16px,
-          #121624 32px);
-      height: 12px;
-      width: 100%;
-    }
-
-    .console-inner-stage {
-      padding: 2.2rem 2.8rem 2.6rem;
-    }
-
-    /* Quiz HUD Stats Header */
-    .quiz-hud-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.25rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(245, 158, 11, 0.2);
-      margin-bottom: 2rem;
-    }
-
-    .quiz-scene-badge {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .scene-pill {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid var(--primary);
-      color: #ffd700;
-      font-size: 0.8rem;
-      font-weight: 800;
-      padding: 0.35rem 0.9rem;
-      border-radius: 8px;
-      letter-spacing: 0.08em;
-      font-family: var(--font-mono);
-    }
-
-    .scene-category {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .quiz-hud-metrics {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-    }
-
-    .hud-chip {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 0.4rem 0.85rem;
-      border-radius: 8px;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-
-    .hud-chip.combo {
-      color: #fbbf24;
-      border-color: rgba(245, 158, 11, 0.35);
-      background: rgba(245, 158, 11, 0.1);
-    }
-
-    .hud-chip.score {
-      color: #34d399;
-      border-color: rgba(52, 211, 153, 0.35);
-    }
-
-    /* 15s Countdown Progress Line */
-    .quiz-timer-strip {
-      width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 999px;
-      overflow: hidden;
-      margin-bottom: 2.2rem;
-      position: relative;
-    }
-
-    .quiz-timer-fill {
-      height: 100%;
-      width: 100%;
-      background: var(--gold-gradient);
-      box-shadow: 0 0 10px var(--primary-glow);
-      transition: width 0.1s linear;
-    }
-
-    /* Interactive Lifelines (Cinema Power-Ups) */
-    .quiz-lifelines-bar {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .lifeline-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      color: #fde68a;
-      padding: 0.4rem 0.95rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      transition: all 0.2s ease;
-    }
-
-    .lifeline-btn:hover:not(:disabled) {
-      background: var(--primary);
-      color: #07090e;
-      transform: translateY(-2px);
-      box-shadow: 0 0 14px var(--primary-glow);
-    }
-
-    .lifeline-btn:disabled {
-      opacity: 0.35;
-      cursor: not-allowed;
-      border-color: rgba(255, 255, 255, 0.1);
-      color: var(--text-dim);
-    }
-
-    /* Main Clapperboard Dialogue Prompt */
-    .dialogue-marquee-card {
-      background: rgba(18, 24, 38, 0.9);
-      border: 1px solid var(--gold-border);
-      border-radius: 18px;
-      padding: 2.4rem 2.2rem;
-      text-align: center;
-      margin-bottom: 2.2rem;
-      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
-      position: relative;
-    }
-
-    .dialogue-marquee-card::before {
-      content: '“';
-      position: absolute;
-      top: 10px;
-      left: 20px;
-      font-family: var(--font-display);
-      font-size: 4rem;
-      color: rgba(245, 158, 11, 0.15);
-      line-height: 1;
-    }
-
-    .punch-dialogue-quote {
-      font-family: 'Jua', 'Outfit', sans-serif;
-      font-size: clamp(1.4rem, 2.6vw, 2.1rem);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.45;
-      margin-bottom: 0.8rem;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-    }
-
-    .punch-dialogue-quote mark {
-      background: none;
-      color: #ffd700;
-      text-shadow: 0 0 16px rgba(255, 215, 0, 0.65);
-    }
-
-    .dialogue-trivia-question {
-      font-size: clamp(0.92rem, 1.2vw, 1.1rem);
-      color: #94a3b8;
-      font-weight: 500;
-    }
-
-    /* 4 Interactive Option Tickets */
-    .quiz-options-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.1rem;
-      margin-bottom: 1.8rem;
-    }
-
-    .option-ticket-btn {
-      background: rgba(20, 26, 42, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      padding: 1.15rem 1.4rem;
-      color: #f1f5f9;
-      font-size: 1rem;
-      font-weight: 600;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .option-ticket-btn .opt-badge {
-      font-family: var(--font-mono);
-      font-weight: 700;
-      color: var(--primary);
-      background: rgba(245, 158, 11, 0.12);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      padding: 0.25rem 0.55rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-    }
-
-    .option-ticket-btn .opt-text {
-      flex-grow: 1;
-    }
-
-    .option-ticket-btn .opt-status-icon {
-      font-size: 1.15rem;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .option-ticket-btn:hover:not(:disabled) {
-      background: rgba(30, 38, 62, 0.95);
-      border-color: var(--primary);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 15px var(--primary-glow-soft);
-    }
-
-    /* Option Ticket State Variations */
-    .option-ticket-btn.correct {
-      background: rgba(16, 185, 129, 0.2) !important;
-      border-color: #10b981 !important;
-      color: #ecfdf5 !important;
-      box-shadow: 0 0 25px rgba(16, 185, 129, 0.45) !important;
-    }
-
-    .option-ticket-btn.correct .opt-status-icon {
-      opacity: 1;
-    }
-
-    .option-ticket-btn.wrong {
-      background: rgba(239, 68, 68, 0.2) !important;
-      border-color: #ef4444 !important;
-      color: #fef2f2 !important;
-      box-shadow: 0 0 25px rgba(239, 68, 68, 0.4) !important;
-    }
-
-    .option-ticket-btn.wrong .opt-status-icon {
-      opacity: 1;
-    }
-
-    .option-ticket-btn.eliminated {
-      opacity: 0.25 !important;
-      text-decoration: line-through;
-      pointer-events: none;
-    }
-
-    /* Crowd Poll Percentage Bar Inside Option */
-    .poll-percentage-bar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 4px;
-      background: var(--primary);
-      transition: width 0.6s ease;
-      display: none;
-    }
-
-    /* Quiz Action Bar (Next Question, Hint Alert, Feedback) */
-    .quiz-action-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .quiz-feedback-box {
-      font-size: 0.95rem;
-      font-weight: 600;
-      min-height: 28px;
-      display: flex;
-      align-items: center;
-    }
-
-    .btn-next-scene {
-      background: var(--gold-gradient);
-      color: #07090e;
-      border: none;
-      padding: 0.75rem 1.6rem;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 0.92rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 18px var(--primary-glow);
-      transition: all 0.25s ease;
-      display: none;
-    }
-
-    .btn-next-scene:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(245, 158, 11, 0.6);
-    }
-
-    /* Hint Box Overlay */
-    .director-hint-card {
-      background: rgba(245, 158, 11, 0.08);
-      border: 1px dashed var(--primary);
-      border-radius: 12px;
-      padding: 1rem 1.4rem;
-      color: #fde68a;
-      font-size: 0.88rem;
-      display: none;
-      margin-bottom: 1.5rem;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    /* ==========================================================
-       FOUR GAME MODES SHOWCASE: RETRO ARCADE CABINETS
-       ========================================================== */
-    .modes-section {
-      position: relative;
-      z-index: 3;
-      padding: 4rem 1.5rem 5rem;
-      max-width: 1360px;
-      margin: 0 auto;
-    }
-
-    .section-title-wrap {
-      text-align: center;
-      max-width: 780px;
-      margin: 0 auto 3.5rem;
-    }
-
-    .modes-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.4rem;
-    }
-
-    .mode-arcade-card {
-      background: linear-gradient(180deg, rgba(16, 21, 34, 0.85) 0%, rgba(9, 12, 20, 0.95) 100%);
-      border: 1px solid rgba(245, 158, 11, 0.22);
-      border-radius: 18px;
-      padding: 1.8rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .mode-arcade-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--gold-gradient);
-      opacity: 0.4;
-      transition: opacity 0.3s ease;
-    }
-
-    .mode-arcade-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--primary);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7), 0 0 30px var(--primary-glow-soft);
-    }
-
-    .mode-arcade-card:hover::before {
-      opacity: 1;
-    }
-
-    .mode-icon-box {
-      width: 54px;
-      height: 54px;
-      border-radius: 14px;
-      background: rgba(245, 158, 11, 0.12);
-      border: 1px solid var(--gold-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .mode-name {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 0.65rem;
-    }
-
-    .mode-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-      margin-bottom: 1.4rem;
-    }
-
-    .mode-arcade-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.78rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      font-weight: 600;
-    }
-
-    /* ==========================================================
-       HALL OF FAME & KODAMBAKKAM LEADERBOARD
-       ========================================================== */
-    .leaderboard-section {
-      position: relative;
-      z-index: 3;
-      padding: 2rem 1.5rem 5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .leaderboard-card-wrapper {
-      background: rgba(14, 18, 30, 0.75);
-      border: 1px solid var(--gold-border);
-      border-radius: 20px;
-      padding: 2.2rem;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
-    }
-
-    .leaderboard-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.1rem;
-      margin-top: 1.8rem;
-    }
-
-    .rank-slot {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 1.2rem;
-      text-align: center;
-      transition: all 0.25s ease;
-    }
-
-    .rank-slot:hover {
-      border-color: var(--primary);
-      transform: translateY(-4px);
-    }
-
-    .rank-slot.first {
-      background: rgba(245, 158, 11, 0.08);
-      border-color: var(--primary);
-      box-shadow: 0 0 25px rgba(245, 158, 11, 0.2);
-    }
-
-    .rank-medal {
-      font-size: 2rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .rank-user {
-      font-weight: 700;
-      color: #fff;
-      font-size: 0.95rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .rank-tier {
-      font-size: 0.72rem;
-      color: var(--primary);
-      text-transform: uppercase;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-    }
-
-    .rank-score {
-      font-family: var(--font-mono);
-      font-size: 0.88rem;
-      color: #ffd700;
-      font-weight: 700;
-    }
-
-    /* ==========================================================
-       VIP GOLDEN TICKET GENERATOR
-       ========================================================== */
-    .ticket-section {
-      position: relative;
-      z-index: 3;
-      padding: 4rem 1.5rem 5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .ticket-stage {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 3rem;
-      align-items: center;
-      background: rgba(14, 18, 30, 0.75);
-      border: 1px solid var(--gold-border);
-      border-radius: 24px;
-      padding: 3rem;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-    }
-
-    .ticket-info h3 {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 2.5vw, 2.3rem);
-      color: #fff;
-      margin: 0.5rem 0 1rem;
-    }
-
-    .ticket-info p {
-      color: var(--text-muted);
-      font-size: 0.94rem;
-      line-height: 1.6;
-      margin-bottom: 1.8rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.2rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .form-input {
-      width: 100%;
-      background: rgba(7, 9, 14, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      padding: 0.8rem 1rem;
-      color: #fff;
-      font-size: 0.95rem;
-      font-family: inherit;
-      outline: none;
-      transition: all 0.2s ease;
-    }
-
-    .form-input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 15px var(--primary-glow-soft);
-    }
-
-    /* 3D Photorealistic Golden Ticket */
-    .golden-ticket {
-      position: relative;
-      width: 100%;
-      height: 250px;
-      background: linear-gradient(135deg, #2a200e 0%, #d4af37 25%, #845e14 50%, #f6d87d 75%, #42300b 100%);
-      border-radius: 18px;
-      padding: 4px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 35px rgba(245, 158, 11, 0.35);
-      display: flex;
-      transition: transform 0.4s ease;
-    }
-
-    .ticket-inner-gold {
-      width: 100%;
-      height: 100%;
-      background: #0d101a;
-      border-radius: 14px;
-      display: grid;
-      grid-template-columns: 1fr 100px;
-      overflow: hidden;
-      border: 1px dashed rgba(245, 158, 11, 0.4);
-    }
-
-    .ticket-body {
-      padding: 1.6rem 1.8rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .ticket-top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      color: #ffd700;
-      text-transform: uppercase;
-    }
-
-    .ticket-main-title {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: 0.06em;
-      margin-bottom: 0.2rem;
-    }
-
-    .ticket-user-display {
-      font-family: var(--font-body);
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #fde68a;
-    }
-
-    .ticket-details-row {
-      display: flex;
-      gap: 1.8rem;
-      font-size: 0.75rem;
-    }
-
-    .ticket-details-row span {
-      display: block;
-      color: var(--text-dim);
-      font-weight: 600;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-    }
-
-    .ticket-details-row b {
-      color: #fff;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-    }
-
-    .ticket-stub {
-      background: rgba(7, 9, 14, 0.95);
-      border-left: 2px dashed rgba(245, 158, 11, 0.35);
-      padding: 1.2rem 0.8rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      text-align: center;
-    }
-
-    .barcode-lines {
-      width: 44px;
-      height: 100px;
-      background: repeating-linear-gradient(90deg,
-          #ffd700 0px, #ffd700 2px,
-          transparent 2px, transparent 4px,
-          #ffd700 4px, #ffd700 7px,
-          transparent 7px, transparent 9px);
-    }
-
-    .ticket-barcode-num {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      color: var(--primary);
-      letter-spacing: 0.08em;
-    }
-
-    /* ==========================================================
-       FOOTER & OFFICIAL REGISTERED ADDRESS
-       ========================================================== */
-    footer {
-      border-top: 1px solid rgba(245, 158, 11, 0.2);
-      background: #040609;
-      padding: 4rem 1.5rem 2.5rem;
-      position: relative;
-      z-index: 10;
-    }
-
-    .footer-container {
-      max-width: 1320px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.75rem;
-    }
-
-    /* Official Registered Address Bar */
-    .footer-address-bar {
-      background: rgba(245, 158, 11, 0.04);
-      border: 1px solid rgba(245, 158, 11, 0.25);
-      border-radius: 16px;
-      padding: 1.4rem 1.8rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .footer-address-content {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.1rem;
-    }
-
-    .footer-address-icon {
-      font-size: 1.6rem;
-      line-height: 1;
-      padding-top: 2px;
-      color: var(--primary);
-    }
-
-    .footer-address-label {
-      display: block;
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 0.4rem;
-    }
-
-    .footer-address-text {
-      color: #e2e8f0;
-      font-size: 0.94rem;
-      line-height: 1.55;
-      font-weight: 500;
-      margin: 0;
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 1.8rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--primary);
-    }
-
-    /* Toast Notification */
-    .toast-popup {
-      position: fixed;
-      bottom: 1.8rem;
-      right: 1.8rem;
-      background: rgba(18, 22, 34, 0.96);
-      border: 1px solid var(--primary);
-      padding: 0.9rem 1.5rem;
-      border-radius: 12px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px var(--primary-glow);
-      z-index: 1000;
-      transform: translateY(120px);
-      opacity: 0;
-      transition: all 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-      max-width: calc(100vw - 3rem);
-      font-size: 0.92rem;
-    }
-
-    .toast-popup.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    /* ==========================================================
-       RESPONSIVE BREAKPOINTS
-       ========================================================== */
-    @media (max-width: 1024px) {
-      .modes-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .leaderboard-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .carousel-card {
-        grid-template-columns: 1fr;
-        height: 520px;
-      }
-
-      .card-media {
-        height: 220px;
-      }
-
-      .carousel-stage {
-        height: 560px;
-      }
-    }
-
-    @media (max-width: 860px) {
-
-      .nav-links,
-      .nav-live-indicator {
-        display: none;
-      }
-
-      .ticket-stage {
-        grid-template-columns: 1fr;
-        padding: 2rem;
-      }
-
-      .hero-stats-ribbon {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-      }
-
-      .quiz-options-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .console-inner-stage {
-        padding: 1.6rem 1.4rem;
-      }
-    }
-
-    @media (max-width: 580px) {
-      .brand-tag {
-        display: none;
-      }
-
-      .coin-badge {
-        display: none;
-      }
-
-      .stat-ribbon-item {
-        border-right: none;
-      }
-
-      .modes-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .leaderboard-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .golden-ticket {
-        height: auto;
-      }
-
-      .ticket-inner-gold {
-        grid-template-columns: 1fr;
-      }
-
-      .ticket-stub {
-        border-left: none;
-        border-top: 2px dashed rgba(245, 158, 11, 0.35);
-        flex-direction: row;
-        padding: 0.8rem 1.5rem;
-      }
-
-      .barcode-lines {
-        height: 35px;
-        width: 80px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Bilet Kollywood Games Private Limited",
+    "alternateName": "Kollywood Games",
+    "url": "https://kollywoodgames.com/",
+    "logo": "https://kollywoodgames.com/images/logo-160.png",
+    "description": "A startup building fun mobile games for Tamil cinema fans.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Coimbatore",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    }
+  }
+  </script>
 </head>
 
 <body>
-  <!-- Ambient Cinema Atmosphere Layer -->
-  <div class="cinema-backdrop" aria-hidden="true"></div>
-  <div class="projector-light-cone" aria-hidden="true"></div>
-  <div class="spotlight-cursor" id="spotlightOverlay" aria-hidden="true"></div>
-  <div class="film-grain" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- NAVIGATION HEADER -->
-  <header>
-    <div class="nav-container">
-      <a href="#" class="brand-link" title="Bilet Kollywood Games">
-        <img src="assets/assets/kollywood_logo.png" alt="Kollywood Games Logo" class="brand-logo-img">
-        <div class="brand-title-wrap">
-          <span class="brand-title">BILET</span>
-          <span class="brand-tag">Kollywood Games</span>
-        </div>
+  <!-- ================= Header ================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="#top" aria-label="Kollywood Games home">
+        <img src="images/logo-160.png" width="40" height="40" alt="">
+        <span>Kollywood <span>Games</span></span>
       </a>
 
-      <!-- Live Online Ticker -->
-      <!-- <div class="nav-live-indicator">
-        <span class="live-dot"></span>
-        <span>14,890 Rasigans Online</span>
-      </div> -->
+      <div class="header-actions">
+        <nav id="site-nav" class="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="#game">The game</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About us</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <a class="btn btn-sm nav-cta"
+            href="mailto:[your-email@yourdomain.com]?subject=Notify%20me%20when%20Kollywood%20Games%20launches">Get notified</a>
+        </nav>
 
-      <!-- Links -->
-      <ul class="nav-links">
-        <li><a href="#showcase" class="active">Featured Games</a></li>
-        <li><a href="#quiz-arena">Quiz Arena 🕹️</a></li>
-        <li><a href="#modes">Game Vault</a></li>
-        <!-- <li><a href="#leaderboard">Hall of Fame</a></li> -->
-        <li><a href="#vipticket">VIP FDFS Pass</a></li>
-      </ul>
+        <a class="btn btn-sm header-cta"
+          href="mailto:[your-email@yourdomain.com]?subject=Notify%20me%20when%20Kollywood%20Games%20launches">Get notified</a>
 
-      <!-- Action Group -->
-      <div class="nav-actions">
-        <!-- <div class="coin-badge" title="Your Current FDFS Balance">
-          <span>🪙</span>
-          <span id="navCoinDisplay">750 COINS</span>
-        </div> -->
+        <button class="icon-btn theme-toggle" type="button" aria-label="Switch to dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+        </button>
 
-        <a href="flutter_app.html" class="btn-play-arena" title="Launch Kollywood Games">
-          <span>Play Game</span>
-          <span>🎮</span>
-        </a>
+        <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- MAIN BODY -->
-  <main>
-    <!-- HERO SECTION -->
-    <section class="hero-section" id="showcase">
-      <div class="hero-header">
-        <div class="cinema-marquee-pill">
-          <span class="marquee-sparkle">⭐</span>
-          <span>Where Tamil Cinema Meets Retro Gaming Arcade</span>
-          <span class="marquee-sparkle">⭐</span>
+  <main id="main">
+    <!-- ================= Hero ================= -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow eyebrow-gold">A new mobile game for Tamil cinema fans</span>
+          <h1 id="hero-title">How well do you know <span class="highlight">Tamil cinema?</span></h1>
+          <p class="lead">Kollywood Games is a free mobile quiz game where you guess famous Tamil movies from illustrated scenes, take on fans across the leaderboard and win exciting rewards every week.</p>
+
+          <div class="hero-actions">
+            <!-- When the app is live, change this href to your Google Play listing: [Google Play listing URL] -->
+            <a class="store-badge"
+              href="mailto:[your-email@yourdomain.com]?subject=Notify%20me%20when%20Kollywood%20Games%20is%20on%20Google%20Play"
+              aria-label="Coming soon on Google Play. Ask to be notified when it launches.">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFC23C" d="M5 3.2v17.6c0 .8.9 1.3 1.6.9l14.6-8.8c.7-.4.7-1.4 0-1.8L6.6 2.3C5.9 1.9 5 2.4 5 3.2z"/></svg>
+              <span><small>Coming soon on</small><strong>Google Play</strong></span>
+            </a>
+            <a class="btn btn-pink"
+              href="mailto:[your-email@yourdomain.com]?subject=Notify%20me%20when%20Kollywood%20Games%20launches">Get notified</a>
+          </div>
+          <p class="hero-note">Android first, with the App Store to follow.</p>
         </div>
 
-        <h1 class="hero-title">
-          Step Onto The <span class="gold-gradient-text">70mm Big Screen</span><br>
-          Play Your Favorite <span class="cinema-badge-glow">Kollywood Battles</span>
-        </h1>
+        <div class="hero-visual">
+          <svg class="reel reel-1" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#1B1446"/><circle cx="50" cy="50" r="40" fill="#FFC23C"/><circle cx="50" cy="24" r="10" fill="#1B1446"/><circle cx="50" cy="76" r="10" fill="#1B1446"/><circle cx="24" cy="50" r="10" fill="#1B1446"/><circle cx="76" cy="50" r="10" fill="#1B1446"/><circle cx="50" cy="50" r="6" fill="#1B1446"/></svg>
+          <svg class="reel reel-2" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#1B1446"/><circle cx="50" cy="50" r="40" fill="#E3336B"/><circle cx="50" cy="24" r="10" fill="#1B1446"/><circle cx="50" cy="76" r="10" fill="#1B1446"/><circle cx="24" cy="50" r="10" fill="#1B1446"/><circle cx="76" cy="50" r="10" fill="#1B1446"/><circle cx="50" cy="50" r="6" fill="#1B1446"/></svg>
 
-        <p class="hero-subtitle">
-          From Superstar's punch dialogues to Anirudh's thunderous BGMs — test your cinema IQ in live multiplayer quiz
-          duels, iconic dialogue decryptors, and box-office showdowns.
-        </p>
-
-        <div class="hero-cta-group">
-          <a href="flutter_app.html" class="btn-play-arena" style="padding: 0.85rem 1.85rem; font-size: 1rem;">
-            <span>Enter The Arena (Launch Game)</span>
-            <span>⚡</span>
-          </a>
-          <a href="#quiz-arena" class="btn-secondary-cinema">
-            <span>Play Live Quiz Arena</span>
-            <span>🕹️</span>
-          </a>
-          <a href="#vipticket" class="btn-secondary-cinema">
-            <span>Claim VIP Ticket</span>
-            <span>🎫</span>
-          </a>
-        </div>
-
-        <!-- Cinema Stat Ribbon -->
-        <div class="hero-stats-ribbon">
-          <div class="stat-ribbon-item">
-            <div class="stat-ribbon-num">540+</div>
-            <div class="stat-ribbon-label">Blockbusters</div>
-          </div>
-          <div class="stat-ribbon-item">
-            <div class="stat-ribbon-num">24.5K</div>
-            <div class="stat-ribbon-label">Daily Duels</div>
-          </div>
-          <div class="stat-ribbon-item">
-            <div class="stat-ribbon-num">1.2M+</div>
-            <div class="stat-ribbon-label">Coins Won</div>
-          </div>
-          <div class="stat-ribbon-item">
-            <div class="stat-ribbon-num">99.4%</div>
-            <div class="stat-ribbon-label">Fan Rating</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- FEATURED 3D SLIDER (Holographic Film Cards) -->
-      <div class="slider-stage-wrapper">
-        <div class="slider-header-bar">
-          <div>
-            <div class="section-eyebrow">🎬 Cinema Cartridge Vault</div>
-            <h2 class="section-heading-gold">Featured Kollywood Game Titles</h2>
-          </div>
-          <div style="color: var(--text-muted); font-size: 0.88rem;">
-            Swipe or use arrows to inspect preview
-          </div>
-        </div>
-
-        <div class="carousel-stage" id="sliderStage">
-          <!-- Slide 1: Bilet Cinema Quiz -->
-          <div class="carousel-card active" data-index="0" onclick="selectSlide(0)">
-            <div class="card-media">
-              <div class="film-strip-edge"></div>
-              <span class="card-tag">🔥 Trending Arena</span>
-              <img src="assets/designs/card_quiz.jpg" alt="Bilet Cinema Quiz Artwork">
-              <div class="media-overlay-gradient"></div>
-            </div>
-            <div class="card-content">
-              <div>
-                <span class="card-genre">Trivia & Box Office</span>
-                <h2 class="card-title">Bilet Cinema Quiz: 100-Crore Clash</h2>
-                <p class="card-desc">
-                  Rapid-fire quiz challenges spanning 5 decades of Tamil cinema. From Sivaji Ganesan classics to Lokesh
-                  Cinematic Universe lore.
-                </p>
-                <div class="card-stats-grid">
-                  <div class="card-stat-box">
-                    <div class="card-stat-label">Difficulty</div>
-                    <div class="card-stat-val">Mass ⭐⭐⭐</div>
-                  </div>
-                  <div class="card-stat-box">
-                    <div class="card-stat-label">Time</div>
-                    <div class="card-stat-val">3 Mins</div>
-                  </div>
-                  <div class="card-stat-box">
-                    <div class="card-stat-label">Mode</div>
-                    <div class="card-stat-val">1v1 PVP</div>
-                  </div>
+          <div class="phone">
+            <div class="phone-screen">
+              <!--
+                ADD YOUR APP SCREENSHOT HERE
+                Replace the whole <div class="mock"> ... </div> block below with:
+                <img src="images/screenshot-hero.webp" width="360" height="760"
+                     alt="Enna Scene-uh quiz screen showing an illustrated movie scene and four answer options">
+                Tip: export at about 720 x 1520 px as WebP to keep it light.
+              -->
+              <div class="mock" role="img" aria-label="Preview of the Enna Scene-uh quiz screen: an illustrated movie scene with four answer options">
+                <div class="mock-top" aria-hidden="true">
+                  <span>Round 3 of 10</span>
+                  <span class="mock-pill">240 pts</span>
                 </div>
-              </div>
-              <div class="card-action-bar">
-                <a href="flutter_app.html" class="btn-play-arena" onclick="event.stopPropagation();">Play Preview</a>
-                <span style="font-size: 0.82rem; color: #ffd700;">🏆 Win Kollywood Badges</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 2: Audio & Dialogue Decryptor -->
-          <div class="carousel-card next" data-index="1" onclick="selectSlide(1)">
-            <div class="card-media">
-              <div class="film-strip-edge"></div>
-              <span class="card-tag">🎧 Soundclash</span>
-              <img src="assets/designs/card_audio.jpg" alt="Kollywood Audio Battle Artwork">
-              <div class="media-overlay-gradient"></div>
-            </div>
-            <div class="card-content">
-              <div>
-                <span class="card-genre">Soundtrack & Voice</span>
-                <h2 class="card-title">Audio & Dialogue Decryptor</h2>
-                <p class="card-desc">
-                  Identify legendary Ilaiyaraaja preludes, AR Rahman beats, and Anirudh drops within 2 seconds. Or match
-                  punch dialogues for score multipliers!
-                </p>
-                <div class="card-stats-grid">
-                  <div class="card-stat-box">
-                    <div class="card-stat-label">Library</div>
-                    <div class="card-stat-val">2,500+ BGM</div>
-                  </div>
-                  <div class="card-stat-box">
-                    <div class="card-stat-label">Format</div>
-                    <div class="card-stat-val">Sound Wave</div>
-                  </div>
-                  <div class="card-stat-box">
-                    <div class="card-stat-label">Reward</div>
-                    <div class="card-stat-val">Gold Cassette</div>
-                  </div>
+                <div class="mock-scene" aria-hidden="true">
+                  <svg viewBox="0 0 320 200">
+                    <defs>
+                      <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E3336B"/><stop offset="1" stop-color="#FFC23C"/></linearGradient>
+                    </defs>
+                    <rect width="320" height="200" fill="url(#sky1)"/>
+                    <circle cx="230" cy="110" r="44" fill="#FFF8EC" opacity=".9"/>
+                    <path d="M0 140 Q80 100 160 135 T320 125 V200 H0z" fill="#139488"/>
+                    <path d="M0 165 Q100 140 200 162 T320 158 V200 H0z" fill="#1B1446"/>
+                    <path d="M60 165 l4-70" stroke="#1B1446" stroke-width="5"/>
+                    <path d="M64 95 q-26 4-38 18 M64 95 q-20-12-40-8 M64 95 q22-10 40-2 M64 95 q24 6 34 22" stroke="#1B1446" stroke-width="5" fill="none" stroke-linecap="round"/>
+                    <circle cx="158" cy="112" r="9" fill="#1B1446"/>
+                    <path d="M158 121 v26 M158 128 l-18-16 M158 128 l18-16 M158 147 l-10 18 M158 147 l10 18" stroke="#1B1446" stroke-width="6" stroke-linecap="round"/>
+                  </svg>
                 </div>
-              </div>
-              <div class="card-action-bar">
-                <a href="flutter_app.html" class="btn-play-arena" onclick="event.stopPropagation();">Guess & Win</a>
-                <span style="font-size: 0.82rem; color: #ffd700;">⚡ Whistle Podu Mode</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3: Mass Intro Hero Showdown -->
-          <div class="carousel-card hidden" data-index="2" onclick="selectSlide(2)">
-            <div class="card-media">
-              <div class="film-strip-edge"></div>
-              <span class="card-tag">👑 Premiere Event</span>
-              <img src="assets/designs/hero_cinema.jpg" alt="Cinema Premiere Hero Artwork">
-              <div class="media-overlay-gradient"></div>
-            </div>
-            <div class="card-content">
-              <div>
-                <span class="card-genre">Interactive Story Mode</span>
-                <h2 class="card-title">FDFS Mass Hero Showdown</h2>
-                <p class="card-desc">
-                  Build your dream film crew, navigate release day box-office controversies, and unlock legendary intro
-                  scene sequences.
-                </p>
-                <div class="card-stats-grid">
-                  <div class="card-stat-box">
-                    <div class="card-stat-label">Genre</div>
-                    <div class="card-stat-val">Sim / RPG</div>
-                  </div>
-                  <div class="card-stat-box">
-                    <div class="card-stat-label">Stars</div>
-                    <div class="card-stat-val">Top Stars</div>
-                  </div>
-                  <div class="card-stat-box">
-                    <div class="card-stat-label">Access</div>
-                    <div class="card-stat-val">VIP Early</div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-action-bar">
-                <a href="#vipticket" class="btn-play-arena" onclick="event.stopPropagation();">Join Early Access</a>
-                <span style="font-size: 0.82rem; color: #ffd700;">🎟️ Limited Balcony Seats</span>
+                <p class="mock-q" aria-hidden="true">Which movie is this scene from?</p>
+                <ul class="mock-options" aria-hidden="true">
+                  <li>A. Movie option</li>
+                  <li class="is-picked">B. Movie option</li>
+                  <li>C. Movie option</li>
+                  <li>D. Movie option</li>
+                </ul>
+                <div class="mock-timer" aria-hidden="true"><span></span></div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Carousel Nav Controls -->
-        <div class="carousel-nav-controls">
-          <button class="nav-arrow-btn" onclick="prevSlide()" aria-label="Previous Slide">←</button>
-          <div class="carousel-dots">
-            <span class="dot-pill active" onclick="selectSlide(0)"></span>
-            <span class="dot-pill" onclick="selectSlide(1)"></span>
-            <span class="dot-pill" onclick="selectSlide(2)"></span>
-          </div>
-          <button class="nav-arrow-btn" onclick="nextSlide()" aria-label="Next Slide">→</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- THE CROWN JEWEL: 70MM CINE-QUIZ ARENA (INTERACTIVE GAME-SHOW CONSOLE) -->
-    <section class="quiz-arena-section" id="quiz-arena">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">🕹️ Live Interactive Arena</span>
-        <h2 class="section-heading-gold">The 70mm Cine-Quiz Arena</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">
-          Test your Tamil cinema memory right now. Answer punch dialogues, unlock combo multipliers, and earn FDFS pass
-          badges!
-        </p>
-      </div>
-
-      <div class="quiz-console-frame">
-        <!-- Top Clapperboard Strip -->
-        <div class="clapperboard-bar"></div>
-
-        <div class="console-inner-stage">
-          <!-- Quiz HUD Bar -->
-          <div class="quiz-hud-header">
-            <div class="quiz-scene-badge">
-              <span class="scene-pill" id="quizSceneNumber">SCENE 01 / 04</span>
-              <span class="scene-category" id="quizCategoryName">PUNCH DIALOGUE CLASH</span>
-            </div>
-
-            <div class="quiz-hud-metrics">
-              <div class="hud-chip combo" id="quizStreakChip">
-                <span>🔥</span>
-                <span id="streakCount">STREAK: 1X</span>
-              </div>
-              <div class="hud-chip score">
-                <span>🪙</span>
-                <span id="quizScoreDisplay">500 COINS</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Timer Bar -->
-          <div class="quiz-timer-strip" title="Scene Countdown Timer">
-            <div class="quiz-timer-fill" id="timerFill"></div>
-          </div>
-
-          <!-- Lifelines Bar -->
-          <div class="quiz-lifelines-bar">
-            <span
-              style="font-size: 0.76rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700; margin-right: 0.5rem;">Cine
-              Power-Ups:</span>
-            <button class="lifeline-btn" id="btn5050" onclick="trigger5050Lifeline()"
-              title="Eliminate two wrong answers">
-              <span>✂️ 50:50 Screen Split</span>
-            </button>
-            <button class="lifeline-btn" id="btnAudience" onclick="triggerAudiencePoll()"
-              title="Show balcony audience votes">
-              <span>👥 Balcony Poll</span>
-            </button>
-            <button class="lifeline-btn" id="btnHint" onclick="triggerDirectorHint()" title="Get director's clue">
-              <span>🎬 Director's Clue</span>
-            </button>
-          </div>
-
-          <!-- Director's Clue Card (Hidden by default) -->
-          <div class="director-hint-card" id="directorHintBox">
-            <span style="font-size: 1.4rem;">💡</span>
-            <div id="directorHintText">Director clue will appear here.</div>
-          </div>
-
-          <!-- Marquee Dialogue Box -->
-          <div class="dialogue-marquee-card">
-            <div class="punch-dialogue-quote" id="quizQuoteText">
-              "நான் ஒரு தடவ சொன்னா... <mark>நூறு தடவ சொன்ன மாதிரி!</mark>"
-            </div>
-            <div class="dialogue-trivia-question" id="quizQuestionText">
-              Which iconic Tamil blockbuster immortalized this dialogue?
-            </div>
-          </div>
-
-          <!-- 4 Option Ticket Buttons -->
-          <div class="quiz-options-grid" id="quizOptionsContainer">
-            <!-- Dynamically populated via JS for rich multi-question gameplay -->
-          </div>
-
-          <!-- Action & Feedback Bar -->
-          <div class="quiz-action-bar">
-            <div class="quiz-feedback-box" id="quizFeedbackBox">
-              <span style="color: var(--text-muted);">Select the correct answer to continue...</span>
-            </div>
-
-            <button class="btn-next-scene" id="btnNextScene" onclick="advanceNextQuizQuestion()">
-              <span>Next Scene Question</span>
-              <span>🎬</span>
-            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FOUR GAME MODES SHOWCASE -->
-    <section class="modes-section" id="modes">
-      <div class="section-title-wrap">
-        <span class="section-eyebrow">Endless Cinema Gaming</span>
-        <h2 class="section-heading-gold">Explore The Kollywood Games Universe</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">
-          Four distinct arcade arenas crafted specifically for passionate Tamil cinema fans.
-        </p>
-      </div>
+    <div class="film-strip" aria-hidden="true"></div>
 
-      <div class="modes-grid">
-        <!-- Mode 1 -->
-        <div class="mode-arcade-card">
-          <div>
-            <div class="mode-icon-box">🎯</div>
-            <h3 class="mode-name">Cinema Quiz Battles</h3>
-            <p class="mode-desc">
-              Live multiplayer quiz matches. Guess director cameos, lyric continuations, and box office records against
-              friends or worldwide rasigans.
-            </p>
+    <!-- ================= The game ================= -->
+    <section class="section" id="game" aria-labelledby="game-title">
+      <div class="container game-grid">
+        <div class="banner-card">
+          <div class="scene">
+            <svg viewBox="0 0 480 270" role="img" aria-label="Original illustration in the style of a hand-painted movie banner: a hero striking a pose on a hill at sunset, with spotlights in the sky">
+              <defs>
+                <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B1446"/><stop offset=".55" stop-color="#E3336B"/><stop offset="1" stop-color="#FFC23C"/></linearGradient>
+              </defs>
+              <rect width="480" height="270" fill="url(#sky2)"/>
+              <path d="M90 0 L150 270 H180 L110 0z M390 0 L300 270 H330 L410 0z" fill="#FFF8EC" opacity=".18"/>
+              <circle cx="240" cy="180" r="70" fill="#FFC23C"/>
+              <circle cx="240" cy="180" r="54" fill="#FFF8EC" opacity=".55"/>
+              <path d="M0 210 Q120 160 240 200 T480 190 V270 H0z" fill="#139488"/>
+              <path d="M0 238 Q140 210 260 232 T480 228 V270 H0z" fill="#1B1446"/>
+              <path d="M70 232 l6-96" stroke="#1B1446" stroke-width="7"/>
+              <path d="M76 136 q-34 6-50 24 M76 136 q-28-16-54-10 M76 136 q30-14 54-2 M76 136 q32 8 46 30" stroke="#1B1446" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <path d="M420 230 l-5-80" stroke="#1B1446" stroke-width="6"/>
+              <path d="M415 150 q-26 4-40 20 M415 150 q-22-12-44-6 M415 150 q24-12 44 0 M415 150 q26 8 36 26" stroke="#1B1446" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <circle cx="240" cy="150" r="13" fill="#1B1446"/>
+              <path d="M240 163 v40 M240 172 l-28-24 M240 172 l26-30 M240 203 l-16 28 M240 203 l16 28" stroke="#1B1446" stroke-width="9" stroke-linecap="round"/>
+              <path d="M228 168 l-6 46 h36 l-6-46z" fill="#1B1446"/>
+            </svg>
           </div>
-          <div class="mode-arcade-footer">
-            <span style="color: var(--text-muted);">⚔️ 1v1 & 4-Player PVP</span>
-            <span style="color: var(--primary);">Real-time Ranking</span>
-          </div>
+          <p class="caption">Which movie is this scene from?</p>
+          <ul class="option-grid" aria-label="Four answer options">
+            <li><b>A</b> Movie one</li>
+            <li><b>B</b> Movie two</li>
+            <li><b>C</b> Movie three</li>
+            <li><b>D</b> Movie four</li>
+          </ul>
         </div>
 
-        <!-- Mode 2 -->
-        <div class="mode-arcade-card">
-          <div>
-            <div class="mode-icon-box">📻</div>
-            <h3 class="mode-name">Nostalgia Audio Vault</h3>
-            <p class="mode-desc">
-              Hear 1.5-second snippets of Tamil instrumental preludes, flute solos, and synth riffs. Race against time
-              to identify the musical maestro!
-            </p>
-          </div>
-          <div class="mode-arcade-footer">
-            <span style="color: var(--text-muted);">🎵 5,000+ Tamil Tracks</span>
-            <span style="color: var(--primary);">High Fidelity</span>
-          </div>
-        </div>
-
-        <!-- Mode 3 -->
-        <div class="mode-arcade-card">
-          <div>
-            <div class="mode-icon-box">🧩</div>
-            <h3 class="mode-name">Poster & Frame Puzzle</h3>
-            <p class="mode-desc">
-              Scrambled vintage movie posters and zoomed-in cinematographic frames. Scratch the digital silver screen to
-              guess the movie title.
-            </p>
-          </div>
-          <div class="mode-arcade-footer">
-            <span style="color: var(--text-muted);">🖼️ 4K Restored Frames</span>
-            <span style="color: var(--primary);">Daily Streaks</span>
-          </div>
-        </div>
-
-        <!-- Mode 4 -->
-        <div class="mode-arcade-card">
-          <div>
-            <div class="mode-icon-box">👑</div>
-            <h3 class="mode-name">Kodambakkam Royale</h3>
-            <p class="mode-desc">
-              Climb from "Balcony Rasigan" to "Superstar Tier". Earn exclusive movie merchandise, premiere tickets, and
-              Discord VIP flair.
-            </p>
-          </div>
-          <div class="mode-arcade-footer">
-            <span style="color: var(--text-muted);">👑 Weekly Cash Rewards</span>
-            <span style="color: var(--primary);">Hall of Fame</span>
-          </div>
+        <div>
+          <span class="eyebrow eyebrow-pink">Game mode 1</span>
+          <h2 id="game-title">Meet <span class="nowrap">Enna Scene-uh</span></h2>
+          <p class="lead">You see an illustrated scene from a famous Tamil movie. You get four options. Pick the right movie before the timer runs out.</p>
+          <p>Every scene is original artwork, painted in the spirit of the big hand-drawn banners that once lined our streets. Some are easy, some will make you rewatch your favourites. It is the quickest way to find out who is the real movie buff in your gang.</p>
+          <ul class="check-list">
+            <li><span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><strong>Illustrated movie scenes.</strong> Iconic moments, redrawn as original art.</span></li>
+            <li><span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><strong>Four options, one answer.</strong> Trust your gut and tap fast.</span></li>
+            <li><span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><strong>Quick rounds.</strong> Play a round in a couple of minutes, anywhere.</span></li>
+            <li><span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><strong>Test your movie memory.</strong> From evergreen classics to recent blockbusters.</span></li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- LEADERBOARD / HALL OF FAME PREVIEW -->
-    <!-- <section class="leaderboard-section" id="leaderboard">
-      <div class="leaderboard-card-wrapper">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-          <div>
-            <div class="section-eyebrow">🏆 Weekly High Scores</div>
-            <h2 class="section-heading-gold" style="font-size: 1.8rem;">Kodambakkam Hall of Fame</h2>
-          </div>
-          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #ffd700;">
-            <span>⏱️ Resetting in: 2d 14h 22m</span>
-          </div>
+    <!-- ================= Features ================= -->
+    <section class="section section-alt" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Why you will love it</span>
+          <h2 id="features-title">Made for fans, by fans</h2>
+          <p class="lead">Everything you need to show off your love for Tamil cinema.</p>
         </div>
 
-        <div class="leaderboard-grid">
-          <div class="rank-slot first">
-            <div class="rank-medal">🥇</div>
-            <div class="rank-user">Thalaivar_Rasigan_96</div>
-            <div class="rank-tier">Superstar Tier</div>
-            <div class="rank-score">28,450 XP • 42 Wins</div>
-          </div>
-          <div class="rank-slot">
-            <div class="rank-medal">🥈</div>
-            <div class="rank-user">Anirudh_BGM_Wizard</div>
-            <div class="rank-tier">Blockbuster Tier</div>
-            <div class="rank-score">24,190 XP • 36 Wins</div>
-          </div>
-          <div class="rank-slot">
-            <div class="rank-medal">🥉</div>
-            <div class="rank-user">LCU_Rolex_Fan</div>
-            <div class="rank-tier">Balcony VIP Tier</div>
-            <div class="rank-score">21,800 XP • 31 Wins</div>
-          </div>
-          <div class="rank-slot">
-            <div class="rank-medal">🎖️</div>
-            <div class="rank-user">Vada_Chennai_Boss</div>
-            <div class="rank-tier">Rasigan Tier</div>
-            <div class="rank-score">19,420 XP • 27 Wins</div>
-          </div>
-        </div>
+        <ul class="feature-grid">
+          <li class="card">
+            <div class="card-icon bg-gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="11" rx="5"/><path d="M8 10.5v4M6 12.5h4"/><circle cx="15.5" cy="11.5" r=".6" fill="currentColor"/><circle cx="17.5" cy="13.5" r=".6" fill="currentColor"/></svg></div>
+            <h3>Free to play</h3>
+            <p>Download and play without paying a rupee. Just you and your movie knowledge.</p>
+          </li>
+          <li class="card">
+            <div class="card-icon bg-pink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V13h4v7M10 20V8h4v12M16 20v-9h4v9"/><path d="M3 20h18"/></svg></div>
+            <h3>Leaderboards</h3>
+            <p>Compete with fans near you and see who really knows their cinema.</p>
+          </li>
+          <li class="card">
+            <div class="card-icon bg-teal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></div>
+            <h3>Fresh questions</h3>
+            <p>New scenes are added regularly, so there is always something new to guess.</p>
+          </li>
+          <li class="card">
+            <div class="card-icon bg-gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M8.5 20h7M10 17h4v3h-4z"/></svg></div>
+            <h3>Weekly rewards</h3>
+            <p>Exciting rewards for top players every week. Rewards every Tamil cinema fan will love.</p>
+          </li>
+        </ul>
       </div>
-    </section> -->
+    </section>
 
-    <!-- VIP GOLDEN TICKET GENERATOR -->
-    <section class="ticket-section" id="vipticket">
-      <div class="ticket-stage">
-        <div class="ticket-info">
-          <span
-            style="color: var(--primary); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.16em;">VIP
-            Premiere Pass</span>
-          <h3>Claim Your FDFS Golden Cinema Ticket</h3>
-          <p>
-            Personalize your golden cinema pass. Get exclusive early access to mobile betas, private tournaments, and
-            founder rewards.
-          </p>
-
-          <form class="ticket-form" onsubmit="event.preventDefault(); updateTicketLive();">
-            <div class="form-group">
-              <label for="userNameInput">Your Cinephile Name</label>
-              <input type="text" id="userNameInput" class="form-input"
-                placeholder="e.g. Thalapathy_Dinesh or Anirudh_Fan" value="Superstar Cinephile"
-                oninput="updateTicketLive()">
-            </div>
-
-            <div class="form-group">
-              <label for="userSeatInput">Favorite Cinema Seat</label>
-              <input type="text" id="userSeatInput" class="form-input" placeholder="e.g. Balcony Row D-12"
-                value="Balcony VIP A-07" oninput="updateTicketLive()">
-            </div>
-
-            <button type="submit" class="btn-play-arena"
-              style="width: 100%; justify-content: center; margin-top: 0.5rem; padding: 0.85rem;"
-              onclick="generateTicketAlert()">
-              <span>Generate VIP Pass & Register</span>
-              <span>🎫</span>
-            </button>
-          </form>
+    <!-- ================= How to play ================= -->
+    <section class="section" id="how-to-play" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow eyebrow-pink">How to play</span>
+          <h2 id="how-title">Three steps to the top</h2>
         </div>
 
-        <!-- Dynamic Photorealistic Golden Cinema Ticket -->
-        <div class="golden-ticket" id="goldenTicketDisplay">
-          <div class="ticket-inner-gold">
-            <div class="ticket-body">
-              <div class="ticket-top-row">
-                <span>BILET CINEMA PASS</span>
-                <span>ADMIT ONE • FDFS</span>
-              </div>
+        <ol class="steps">
+          <li class="step">
+            <div class="step-num" aria-hidden="true">1</div>
+            <h3>Download the app</h3>
+            <p>Get Kollywood Games free from Google Play when it launches. The App Store version follows soon after.</p>
+          </li>
+          <li class="step">
+            <div class="step-num" aria-hidden="true">2</div>
+            <h3>Play the quiz</h3>
+            <p>Look at the scene, pick the right movie from four options and score points for every correct answer.</p>
+          </li>
+          <li class="step">
+            <div class="step-num" aria-hidden="true">3</div>
+            <h3>Climb and win</h3>
+            <p>Rise up the leaderboard and the top players win exciting rewards every week.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
 
-              <div>
-                <div class="ticket-main-title">KOLLYWOOD GAMES</div>
-                <div class="ticket-user-display" id="ticketUserNameDisplay">Superstar Cinephile</div>
-              </div>
+    <!-- ================= Screenshots ================= -->
+    <section class="section section-alt" id="screenshots" aria-labelledby="shots-title">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow eyebrow-gold">Sneak peek</span>
+          <h2 id="shots-title">A first look at the app</h2>
+          <p class="lead">Screens from the upcoming app. More coming before launch.</p>
+        </div>
 
-              <div class="ticket-details-row">
-                <div>
-                  <span>SEAT NO</span>
-                  <b id="ticketSeatDisplay">A-07 BALCONY</b>
-                </div>
-                <div>
-                  <span>STATUS</span>
-                  <b style="color: #34d399;">VIP CONFIRMED</b>
-                </div>
-                <div>
-                  <span>SEASON</span>
-                  <b>PREMIERE 2026</b>
+        <ul class="shots">
+          <li>
+            <figure>
+              <div class="phone">
+                <div class="phone-screen">
+                  <!-- ADD SCREENSHOT 1 HERE: replace the .shot-slot div with
+                       <img src="images/screenshot-1.webp" width="360" height="760" loading="lazy" decoding="async" alt="[Describe screenshot 1]"> -->
+                  <div class="shot-slot">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg>
+                    <span>Screenshot coming soon</span>
+                  </div>
                 </div>
               </div>
+              <figcaption>Home screen</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <div class="phone">
+                <div class="phone-screen">
+                  <!-- ADD SCREENSHOT 2 HERE: replace the .shot-slot div with
+                       <img src="images/screenshot-2.webp" width="360" height="760" loading="lazy" decoding="async" alt="[Describe screenshot 2]"> -->
+                  <div class="shot-slot">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg>
+                    <span>Screenshot coming soon</span>
+                  </div>
+                </div>
+              </div>
+              <figcaption>Enna Scene-uh quiz</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <div class="phone">
+                <div class="phone-screen">
+                  <!-- ADD SCREENSHOT 3 HERE: replace the .shot-slot div with
+                       <img src="images/screenshot-3.webp" width="360" height="760" loading="lazy" decoding="async" alt="[Describe screenshot 3]"> -->
+                  <div class="shot-slot">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg>
+                    <span>Screenshot coming soon</span>
+                  </div>
+                </div>
+              </div>
+              <figcaption>Leaderboard</figcaption>
+            </figure>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="film-strip" aria-hidden="true"></div>
+
+    <!-- ================= About us ================= -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div>
+          <span class="eyebrow">About us</span>
+          <h2 id="about-title">The people behind the game</h2>
+          <p class="lead">Kollywood Games is built by <strong>Bilet Kollywood Games Private Limited</strong>, a startup based in Coimbatore, Tamil Nadu, India.</p>
+          <p>We are a small team of Tamil cinema lovers and game makers. We grew up debating dialogues, humming songs and arguing over favourite scenes, and we are building the games we always wanted to play with our friends.</p>
+
+          <dl class="facts">
+            <div>
+              <dt>Company</dt>
+              <dd>Bilet Kollywood Games Private Limited</dd>
             </div>
-
-            <div class="ticket-stub">
-              <span style="font-size: 0.7rem; color: #ffd700; font-weight: 800; letter-spacing: 0.08em;">BILET</span>
-              <div class="barcode-lines"></div>
-              <div class="ticket-barcode-num">FDFS-88921</div>
+            <div>
+              <dt>Based in</dt>
+              <dd>Coimbatore, Tamil Nadu, India</dd>
             </div>
+            <div>
+              <dt>Product</dt>
+              <dd>Kollywood Games, a mobile quiz game</dd>
+            </div>
+            <div>
+              <dt>Platforms</dt>
+              <dd>Android (Google Play), iOS to follow</dd>
+            </div>
+          </dl>
+
+          <div class="mission">
+            <h3>Our mission</h3>
+            <p>To bring Tamil cinema fans together through fun games and give them reasons to celebrate their love for movies.</p>
           </div>
+        </div>
+
+        <aside class="founder" aria-labelledby="founder-name">
+          <!-- Optional: replace the initials circle with a founder photo, e.g.
+               <img src="images/founder.webp" width="96" height="96" loading="lazy" alt="Photo of [Founder full name]"> -->
+          <div class="founder-avatar" aria-hidden="true">KG</div>
+          <h3 id="founder-name">[Founder full name]</h3>
+          <span class="founder-role">Founder &amp; CEO</span>
+          <p>[Short founder background: 2 to 3 lines about your experience, what you built before and why you started Kollywood Games.]</p>
+          <a class="link-btn" href="[LinkedIn URL]" rel="noopener" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z"/></svg>
+            Connect on LinkedIn<span class="visually-hidden"> (opens in a new tab)</span>
+          </a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ================= Contact ================= -->
+    <section class="section section-alt" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-panel">
+          <h2 id="contact-title">Say vanakkam</h2>
+          <p class="lead">Players, partners and investors, we would love to hear from you. Drop us a line about the game, a collaboration or anything else.</p>
+
+          <ul class="contact-list">
+            <li>
+              <span class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email</span>
+              <a href="mailto:[your-email@yourdomain.com]">[your-email@yourdomain.com]</a>
+            </li>
+            <li>
+              <span class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Phone</span>
+              <a href="tel:[+91 XXXXX XXXXX]">[+91 XXXXX XXXXX]</a>
+            </li>
+            <li>
+              <span class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Registered office</span>
+              <address>Bilet Kollywood Games Private Limited<br>[Registered office address]<br>Coimbatore, Tamil Nadu, India</address>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-container">
+  <!-- ================= Footer ================= -->
+  <footer class="site-footer">
+    <div class="container">
       <div class="footer-top">
-        <div style="display: flex; align-items: center; gap: 0.9rem;">
-          <img src="assets/assets/kollywood_logo.png" alt="Kollywood Games Logo" class="brand-logo-img">
-          <div>
-            <div class="brand-title">BILET</div>
-            <div class="brand-tag">Kollywood Games Universe</div>
-          </div>
-        </div>
-
-        <div style="color: var(--text-muted); font-size: 0.9rem; max-width: 480px;">
-          Crafted with passion for Tamil cinema lovers worldwide. Celebrating the timeless 70mm magic of Kollywood
-          through interactive arcade gaming.
-        </div>
+        <a class="wordmark" href="#top" aria-label="Kollywood Games, back to top">
+          <img src="images/logo-160.png" width="40" height="40" alt="" loading="lazy">
+          <span>Kollywood <span>Games</span></span>
+        </a>
+        <ul class="footer-links">
+          <li><a href="privacy-policy.html">Privacy policy</a></li>
+          <li><a href="terms.html">Terms of use</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-
-      <!-- Official Registered Office Address -->
-      <div class="footer-address-bar">
-        <div class="footer-address-content">
-          <span class="footer-address-icon">📍</span>
-          <div>
-            <span class="footer-address-label">Official Registered Address</span>
-            <p class="footer-address-text">
-              SF NO 164/4A SITE NO 4, WEST ,VINAYAGA GARDENS, Malumichampatti, Coimbatore- 641050, Tamil Nadu
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div>&copy; 2026 Bilet Kollywood Games. All rights reserved.</div>
-        <div class="footer-links">
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Play</a>
-          <a href="flutter_app.html" style="color: var(--primary); font-weight: 700;">Play Flutter Game →</a>
-        </div>
-      </div>
+      <p>&copy; 2026 Bilet Kollywood Games Private Limited. CIN: [CIN]. Coimbatore, Tamil Nadu, India. All quiz illustrations are original artwork.</p>
     </div>
   </footer>
 
-  <!-- Toast Notification Popup -->
-  <div class="toast-popup" id="toastPopup">
-    <span id="toastIcon">✨</span>
-    <span id="toastMessage">Welcome to Bilet Kollywood Games!</span>
-  </div>
-
-  <!-- JAVASCRIPT: INTERACTIVE CINEMA ENGINE -->
-  <script>
-    /* ==========================================================
-       SPOTLIGHT CURSOR INTERACTION
-       ========================================================== */
-    window.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-      document.documentElement.style.setProperty('--mouse-x', `${x}%`);
-      document.documentElement.style.setProperty('--mouse-y', `${y}%`);
-    });
-
-    /* ==========================================================
-       CAROUSEL 3D SLIDER LOGIC
-       ========================================================== */
-    let currentSlide = 0;
-    const cards = document.querySelectorAll('.carousel-card');
-    const dots = document.querySelectorAll('.dot-pill');
-    const totalSlides = cards.length;
-
-    function updateCarousel() {
-      cards.forEach((card, idx) => {
-        card.classList.remove('active', 'prev', 'next', 'hidden');
-        if (idx === currentSlide) {
-          card.classList.add('active');
-        } else if (idx === (currentSlide - 1 + totalSlides) % totalSlides) {
-          card.classList.add('prev');
-        } else if (idx === (currentSlide + 1) % totalSlides) {
-          card.classList.add('next');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === currentSlide);
-      });
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateCarousel();
-    }
-
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      updateCarousel();
-    }
-
-    function selectSlide(index) {
-      currentSlide = index;
-      updateCarousel();
-    }
-
-    let slideTimer = setInterval(nextSlide, 7500);
-    const sliderContainer = document.getElementById('sliderStage');
-    if (sliderContainer) {
-      sliderContainer.addEventListener('mouseenter', () => clearInterval(slideTimer));
-      sliderContainer.addEventListener('mouseleave', () => {
-        clearInterval(slideTimer);
-        slideTimer = setInterval(nextSlide, 7500);
-      });
-
-      // Touch swipe support for mobile
-      let touchStartX = 0;
-      let touchEndX = 0;
-      sliderContainer.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
-
-      sliderContainer.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchEndX - touchStartX;
-        if (Math.abs(diff) > 40) {
-          if (diff < 0) nextSlide();
-          else prevSlide();
-        }
-      }, { passive: true });
-    }
-
-    /* ==========================================================
-       THE CROWN JEWEL: 70MM CINE-QUIZ ENGINE
-       Multi-Round Question Bank with Lifelines & Combo Streaks
-       ========================================================== */
-    const quizQuestionBank = [
-      {
-        sceneNum: "SCENE 01 / 04",
-        category: "PUNCH DIALOGUE CLASH",
-        quote: '"நான் ஒரு தடவ சொன்னா... <mark>நூறு தடவ சொன்ன மாதிரி!</mark>"',
-        question: "Which iconic Tamil blockbuster made this punch dialogue immortal?",
-        options: [
-          { label: "A", text: "Padayappa (1999)", correct: false, poll: "12%" },
-          { label: "B", text: "Baashha (1995)", correct: true, poll: "78%" },
-          { label: "C", text: "Annamalai (1992)", correct: false, poll: "6%" },
-          { label: "D", text: "Muthu (1995)", correct: false, poll: "4%" }
-        ],
-        hint: "Directed by Suresh Krissna, starring Superstar Rajinikanth as an auto-driver with a Mumbai underworld past.",
-        celebration: "🔥 MASS! Baashha (1995) is 100% correct! Superstar Thalaivar swag unlocked!"
-      },
-      {
-        sceneNum: "SCENE 02 / 04",
-        category: "LCU INTERVAL ROAR",
-        quote: '"ஆரம்பிக்கலாங்களா... <mark>Once upon a time there lived a ghost!</mark>"',
-        question: "Which record-breaking action blockbuster featured this electrifying interval scene?",
-        options: [
-          { label: "A", text: "Kaithi (2019)", correct: false, poll: "10%" },
-          { label: "B", text: "Leo (2023)", correct: false, poll: "14%" },
-          { label: "C", text: "Vikram (2022)", correct: true, poll: "70%" },
-          { label: "D", text: "Master (2021)", correct: false, poll: "6%" }
-        ],
-        hint: "Directed by Lokesh Kanagaraj, starring Kamal Haasan with Anirudh's thunderous BGM theme.",
-        celebration: "🔥 SAMBHAVAM! Vikram (2022) is right! Commander Agent Vikram reports for duty!"
-      },
-      {
-        sceneNum: "SCENE 03 / 04",
-        category: "THALAPATHY ATTITUDE",
-        quote: '"நாம ஜெயிக்குறோமோ இல்லையோ... <mark>சண்டைய வெயிட்டா செய்யணும்!</mark>"',
-        question: "Which Thalapathy Vijay blockbuster featured this viral JD philosophy?",
-        options: [
-          { label: "A", text: "Master (2021)", correct: true, poll: "82%" },
-          { label: "B", text: "Mersal (2017)", correct: false, poll: "7%" },
-          { label: "C", text: "Bigil (2019)", correct: false, poll: "6%" },
-          { label: "D", text: "Beast (2022)", correct: false, poll: "5%" }
-        ],
-        hint: "Professor JD battles gangster Bhavani in a juvenile correctional facility.",
-        celebration: "🔥 MASS CLASS! Master (2021) is spot on! Thalapathy fan badge earned!"
-      },
-      {
-        sceneNum: "SCENE 04 / 04",
-        category: "THALA CASINO HEIST",
-        quote: '"Money... Money... Money... <mark>This is my game!</mark>"',
-        question: "Vinayak Mahadev ACP rocked this fearless anti-hero swagger in which thriller?",
-        options: [
-          { label: "A", text: "Billa (2007)", correct: false, poll: "9%" },
-          { label: "B", text: "Mankatha (2011)", correct: true, poll: "81%" },
-          { label: "C", text: "Arrambam (2013)", correct: false, poll: "5%" },
-          { label: "D", text: "Vedalam (2015)", correct: false, poll: "5%" }
-        ],
-        hint: "Directed by Venkat Prabhu, starring Ajith Kumar in a 500-crore IPL betting money heist.",
-        celebration: "🔥 PURE THALA SWAG! Mankatha (2011) is 100% correct! You conquered the arena!"
-      }
-    ];
-
-    let currentQuizIndex = 0;
-    let quizCoins = 500;
-    let currentStreak = 1;
-    let questionAnswered = false;
-    let timerInterval = null;
-    let lifelinesUsed = { split: false, poll: false, hint: false };
-
-    function renderQuizQuestion() {
-      const q = quizQuestionBank[currentQuizIndex];
-      questionAnswered = false;
-
-      // Update HUD
-      document.getElementById('quizSceneNumber').textContent = q.sceneNum;
-      document.getElementById('quizCategoryName').textContent = q.category;
-      document.getElementById('quizQuoteText').innerHTML = q.quote;
-      document.getElementById('quizQuestionText').textContent = q.question;
-      document.getElementById('directorHintBox').style.display = 'none';
-      document.getElementById('btnNextScene').style.display = 'none';
-      document.getElementById('quizFeedbackBox').innerHTML = `<span style="color: var(--text-muted);">Select the correct option to lock your answer...</span>`;
-
-      // Render Options
-      const container = document.getElementById('quizOptionsContainer');
-      container.innerHTML = '';
-
-      q.options.forEach((opt, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'option-ticket-btn';
-        btn.dataset.correct = opt.correct;
-        btn.dataset.index = idx;
-        btn.onclick = () => selectQuizAnswer(btn, opt.correct, q.celebration);
-
-        btn.innerHTML = `
-          <span class="opt-badge">[${opt.label}]</span>
-          <span class="opt-text">${opt.text}</span>
-          <span class="opt-status-icon">${opt.correct ? '🏆' : '❌'}</span>
-          <div class="poll-percentage-bar" id="pollBar${idx}" style="width: 0%;"></div>
-        `;
-
-        container.appendChild(btn);
-      });
-
-      // Reset timer visual bar
-      const timerFill = document.getElementById('timerFill');
-      timerFill.style.width = '100%';
-      clearInterval(timerInterval);
-      let timeLeft = 100;
-      timerInterval = setInterval(() => {
-        if (questionAnswered) {
-          clearInterval(timerInterval);
-          return;
-        }
-        timeLeft -= 1;
-        timerFill.style.width = `${timeLeft}%`;
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          handleTimeOut();
-        }
-      }, 150);
-    }
-
-    function selectQuizAnswer(selectedBtn, isCorrect, celebrationMsg) {
-      if (questionAnswered) return;
-      questionAnswered = true;
-      clearInterval(timerInterval);
-
-      const allBtns = document.querySelectorAll('.option-ticket-btn');
-      allBtns.forEach(btn => btn.disabled = true);
-
-      const feedback = document.getElementById('quizFeedbackBox');
-
-      if (isCorrect) {
-        selectedBtn.classList.add('correct');
-        currentStreak += 1;
-        quizCoins += (250 * currentStreak);
-
-        // Update Coin displays
-        document.getElementById('quizScoreDisplay').textContent = `${quizCoins} COINS`;
-        document.getElementById('navCoinDisplay').textContent = `${quizCoins} COINS`;
-        document.getElementById('streakCount').textContent = `STREAK: ${currentStreak}X`;
-        document.getElementById('quizStreakChip').style.boxShadow = '0 0 16px rgba(245, 158, 11, 0.4)';
-
-        feedback.innerHTML = `<span style="color: #34d399;">${celebrationMsg} (+${250 * currentStreak} Coins)</span>`;
-        showToast(`Mass Answer! ${250 * currentStreak} Coins earned! 🪙`, '🏆');
-      } else {
-        selectedBtn.classList.add('wrong');
-        currentStreak = 1;
-        document.getElementById('streakCount').textContent = `STREAK: 1X`;
-
-        // Highlight correct option
-        allBtns.forEach(btn => {
-          if (btn.dataset.correct === 'true') btn.classList.add('correct');
-        });
-
-        feedback.innerHTML = `<span style="color: #f87171;">Ayyo! Correct answer highlighted above. Try the next round!</span>`;
-        showToast("Nice try! Check the correct answer!", "🎬");
-      }
-
-      // Show Next Scene Button
-      const nextBtn = document.getElementById('btnNextScene');
-      if (currentQuizIndex < quizQuestionBank.length - 1) {
-        nextBtn.innerHTML = `<span>Next Scene Question</span> <span>🎬</span>`;
-      } else {
-        nextBtn.innerHTML = `<span>Replay All Rounds</span> <span>🔄</span>`;
-      }
-      nextBtn.style.display = 'inline-flex';
-    }
-
-    function handleTimeOut() {
-      if (questionAnswered) return;
-      questionAnswered = true;
-      const allBtns = document.querySelectorAll('.option-ticket-btn');
-      allBtns.forEach(btn => {
-        btn.disabled = true;
-        if (btn.dataset.correct === 'true') btn.classList.add('correct');
-      });
-      document.getElementById('quizFeedbackBox').innerHTML = `<span style="color: #f87171;">Time out! Review the correct answer and advance to the next round.</span>`;
-      document.getElementById('btnNextScene').style.display = 'inline-flex';
-    }
-
-    function advanceNextQuizQuestion() {
-      currentQuizIndex = (currentQuizIndex + 1) % quizQuestionBank.length;
-      renderQuizQuestion();
-    }
-
-    /* Lifeline 1: 50:50 Screen Split */
-    function trigger5050Lifeline() {
-      if (lifelinesUsed.split || questionAnswered) return;
-      lifelinesUsed.split = true;
-      document.getElementById('btn5050').disabled = true;
-
-      const wrongBtns = [];
-      document.querySelectorAll('.option-ticket-btn').forEach(btn => {
-        if (btn.dataset.correct !== 'true') wrongBtns.push(btn);
-      });
-
-      // Randomly eliminate two wrong buttons
-      wrongBtns.slice(0, 2).forEach(btn => {
-        btn.classList.add('eliminated');
-      });
-
-      showToast("50:50 Lifeline Activated! 2 incorrect options removed! ✂️", "⚡");
-    }
-
-    /* Lifeline 2: Balcony Audience Poll */
-    function triggerAudiencePoll() {
-      if (lifelinesUsed.poll || questionAnswered) return;
-      lifelinesUsed.poll = true;
-      document.getElementById('btnAudience').disabled = true;
-
-      const q = quizQuestionBank[currentQuizIndex];
-      q.options.forEach((opt, idx) => {
-        const bar = document.getElementById(`pollBar${idx}`);
-        if (bar) {
-          bar.style.display = 'block';
-          bar.style.width = opt.poll;
-        }
-      });
-
-      showToast("Balcony Crowd Poll Revealed! Check the percentage bars below! 👥", "📊");
-    }
-
-    /* Lifeline 3: Director's Hint */
-    function triggerDirectorHint() {
-      if (lifelinesUsed.hint || questionAnswered) return;
-      lifelinesUsed.hint = true;
-      document.getElementById('btnHint').disabled = true;
-
-      const q = quizQuestionBank[currentQuizIndex];
-      const hintBox = document.getElementById('directorHintBox');
-      const hintText = document.getElementById('directorHintText');
-      hintText.innerHTML = `<strong>Director's Clue:</strong> ${q.hint}`;
-      hintBox.style.display = 'flex';
-
-      showToast("Director's Clue Unlocked! 🎬", "💡");
-    }
-
-    // Initialize Quiz on load
-    renderQuizQuestion();
-
-    /* ==========================================================
-       VIP PASS LIVE GENERATOR
-       ========================================================== */
-    function updateTicketLive() {
-      const nameInput = document.getElementById('userNameInput').value.trim() || 'Superstar Cinephile';
-      const seatInput = document.getElementById('userSeatInput').value.trim() || 'Balcony VIP A-07';
-
-      document.getElementById('ticketUserNameDisplay').textContent = nameInput;
-      document.getElementById('ticketSeatDisplay').textContent = seatInput.toUpperCase();
-    }
-
-    function generateTicketAlert() {
-      showToast("🎟️ FDFS VIP Pass Confirmed! Welcome to Kollywood Games!", "✨");
-      const ticket = document.getElementById('goldenTicketDisplay');
-      ticket.style.transform = 'scale(1.03)';
-      setTimeout(() => ticket.style.transform = 'scale(1)', 350);
-    }
-
-    /* ==========================================================
-       TOAST POPUP HELPER
-       ========================================================== */
-    let toastTimeout;
-    function showToast(message, icon = '✨') {
-      const toast = document.getElementById('toastPopup');
-      const msgEl = document.getElementById('toastMessage');
-      const iconEl = document.getElementById('toastIcon');
-
-      msgEl.textContent = message;
-      iconEl.textContent = icon;
-      toast.classList.add('visible');
-
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
-        toast.classList.remove('visible');
-      }, 3500);
-    }
-  </script>
+  <script src="script.js" defer></script>
 </body>
 
 </html>
