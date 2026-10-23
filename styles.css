@@ -899,6 +899,8 @@ a:hover { color: var(--ink); }
   border-radius: var(--radius);
 }
 
+.facts div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
 .facts dt {
   font-size: 0.9rem;
   font-weight: 700;
