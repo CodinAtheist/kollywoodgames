@@ -1,300 +1,199 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="gold">
+<html lang="en-IN">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Terms of Play | Bilet Kollywood Games Private Limited</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terms of use | Kollywood Games</title>
   <meta name="description"
-    content="Official Terms of Play for Kollywood Games by Bilet Kollywood Games Private Limited. Rules of engagement, quiz tournament guidelines, and reward redemption terms.">
+    content="Terms of use for the Kollywood Games mobile quiz app by Bilet Kollywood Games Private Limited: accounts, fair play, leaderboards, rewards, ads and your rights.">
+  <meta name="theme-color" content="#1B1446">
+  <link rel="canonical" href="https://kollywoodgames.com/terms.html">
 
-  <!-- Favicon & Icons -->
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Kollywood Games">
+  <meta property="og:title" content="Terms of use | Kollywood Games">
+  <meta property="og:description" content="The rules for playing the Kollywood Games mobile quiz app.">
+  <meta property="og:url" content="https://kollywoodgames.com/terms.html">
+  <meta property="og:image" content="https://kollywoodgames.com/images/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Terms of use | Kollywood Games">
+  <meta name="twitter:description" content="The rules for playing the Kollywood Games mobile quiz app.">
+  <meta name="twitter:image" content="https://kollywoodgames.com/images/og-image.png">
 
-  <!-- Google Fonts -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <script>
+    try { var t = localStorage.getItem("kg-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Jua&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Catamaran:wght@400;600;700;800&display=swap"
     rel="stylesheet">
-
-  <style>
-    :root,
-    [data-theme="gold"] {
-      --bg-dark: #07090e;
-      --bg-surface: #0c0f17;
-      --bg-card: rgba(15, 19, 30, 0.85);
-      --bg-glass: rgba(18, 22, 34, 0.75);
-
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-
-      --primary: #f59e0b;
-      --primary-light: #fbbf24;
-      --primary-dark: #b45309;
-      --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #ffd700 50%, #d97706 100%);
-      --gold-border: rgba(245, 158, 11, 0.3);
-
-      --font-display: 'Cinzel', serif;
-      --font-body: 'Outfit', sans-serif;
-      --font-mono: 'Space Grotesk', monospace;
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      min-height: 100vh;
-      line-height: 1.7;
-    }
-
-    .bg-beam {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-      background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.12) 0%, transparent 60%);
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(7, 9, 14, 0.88);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--gold-border);
-      padding: 1rem 1.5rem;
-    }
-
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .brand-link {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      text-decoration: none;
-      color: var(--text-main);
-    }
-
-    .brand-logo {
-      height: 42px;
-    }
-
-    .brand-title {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 800;
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-back-btn {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.2s ease;
-    }
-
-    .nav-back-btn:hover {
-      color: var(--primary);
-      border-color: var(--primary);
-    }
-
-    main {
-      position: relative;
-      z-index: 1;
-      max-width: 960px;
-      margin: 3rem auto 6rem;
-      padding: 0 1.5rem;
-    }
-
-    .terms-hero {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
-
-    .terms-hero h1 {
-      font-family: var(--font-display);
-      font-size: 2.75rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(180deg, #ffffff 40%, #cbd5e1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .terms-content {
-      background: var(--bg-glass);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      padding: 3rem;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .terms-section {
-      margin-bottom: 2.8rem;
-    }
-
-    .terms-section h2 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--text-main);
-      margin-bottom: 1rem;
-      border-bottom: 1px solid rgba(245, 158, 11, 0.2);
-      padding-bottom: 0.5rem;
-    }
-
-    .terms-section p, .terms-section li {
-      color: #cbd5e1;
-      font-size: 0.98rem;
-    }
-
-    .terms-section ul {
-      margin-left: 1.5rem;
-      margin-top: 0.5rem;
-    }
-
-    footer {
-      border-top: 1px solid rgba(245, 158, 11, 0.2);
-      background: #040609;
-      padding: 3rem 1.5rem;
-      position: relative;
-      z-index: 10;
-    }
-
-    .footer-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      color: var(--primary);
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <div class="bg-beam"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header>
-    <div class="nav-container">
-      <a href="index.html" class="brand-link">
-        <img src="assets/assets/kollywood_logo.png" alt="Kollywood Games Logo" class="brand-logo" onerror="this.style.display='none'">
-        <span class="brand-title">KOLLYWOOD GAMES</span>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="index.html" aria-label="Kollywood Games home">
+        <img src="images/logo-160.png" width="40" height="40" alt="">
+        <span>Kollywood <span>Games</span></span>
       </a>
-      <a href="index.html" class="nav-back-btn">← Back to Home</a>
+
+      <div class="header-actions">
+        <nav id="site-nav" class="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="index.html#game">The game</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#about">About us</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+          <a class="btn btn-sm nav-cta"
+            href="mailto:[your-email@yourdomain.com]?subject=Notify%20me%20when%20Kollywood%20Games%20launches">Get notified</a>
+        </nav>
+
+        <a class="btn btn-sm header-cta"
+          href="mailto:[your-email@yourdomain.com]?subject=Notify%20me%20when%20Kollywood%20Games%20launches">Get notified</a>
+
+        <button class="icon-btn theme-toggle" type="button" aria-label="Switch to dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+        </button>
+
+        <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="terms-hero">
-      <h1>Terms of Play</h1>
-      <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto;">
-        Guidelines and terms governing your gameplay, tournament rankings, and reward claims on Kollywood Games.
-      </p>
-    </section>
+  <main id="main" class="legal">
+    <div class="container">
+      <p class="draft-note" role="note">Draft: these terms of use are a working draft and must be reviewed by a qualified lawyer before the app launches. Items in square brackets are placeholders to be filled in.</p>
 
-    <article class="terms-content">
-      <section class="terms-section">
-        <h2>1. Acceptance of Terms</h2>
-        <p>
-          By downloading, installing, or engaging with <strong>Kollywood Games</strong>, developed and operated by <strong>BILET KOLLYWOOD GAMES PRIVATE LIMITED</strong>, you enter into a legally binding agreement to abide by these Terms of Play.
-        </p>
-      </section>
+      <h1>Terms of use</h1>
+      <p class="meta">Effective date: [Effective date]<br>Last updated: [Last updated date]</p>
 
-      <section class="terms-section">
-        <h2>2. Fair Play & Anti-Cheat Policy</h2>
-        <p>Kollywood Games celebrates cinematic knowledge and quick reflex trivia. To protect honest players:</p>
-        <ul>
-          <li>Using automated response scripts, reverse-engineered APKs, memory editors, or emulator hooks is strictly forbidden.</li>
-          <li>Multiple accounts created by a single individual to manipulate referral bonuses or contest odds will result in immediate disqualification and forfeiture of reward tickets.</li>
-        </ul>
-      </section>
+      <p>These terms of use ("Terms") are an agreement between you and Bilet Kollywood Games Private Limited ("we", "us" or "our") for your use of the Kollywood Games mobile app, this website and related services (together, the "Service"). Please read them carefully. By downloading, accessing or playing, you agree to these Terms and to our <a href="privacy-policy.html">privacy policy</a>.</p>
 
-      <section class="terms-section">
-        <h2>3. Movie Trivia & Intellectual Property Fair Use</h2>
-        <p>
-          Kollywood Games is an interactive fan trivia experience. All film titles, character names, dialogues, and music excerpts referenced within quiz questions are the intellectual property of their respective producers, copyright holders, and creators. They are used here strictly under statutory principles of fair use for entertainment, trivia, review, and cultural appreciation.
-        </p>
-      </section>
+      <nav class="toc" aria-label="On this page">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#the-service">The Service</a></li>
+          <li><a href="#eligibility">Who can play</a></li>
+          <li><a href="#accounts">Your account</a></li>
+          <li><a href="#fair-play">Fair play</a></li>
+          <li><a href="#leaderboards">Leaderboards</a></li>
+          <li><a href="#rewards">Weekly rewards</a></li>
+          <li><a href="#ads">Ads</a></li>
+          <li><a href="#content">Content and intellectual property</a></li>
+          <li><a href="#your-content">Your content</a></li>
+          <li><a href="#availability">Availability and changes</a></li>
+          <li><a href="#disclaimers">Disclaimers and limitation of liability</a></li>
+          <li><a href="#termination">Suspension and termination</a></li>
+          <li><a href="#law">Governing law and disputes</a></li>
+          <li><a href="#changes">Changes to these terms</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ol>
+      </nav>
 
-      <section class="terms-section">
-        <h2>4. Rewards, Tickets & Contests</h2>
-        <p>
-          Players can earn in-game tickets and qualify for movie promotions (including FDFS movie tickets):
-        </p>
-        <ul>
-          <li>Reward tickets hold no direct cash redemption value except as explicitly stated in promotional events.</li>
-          <li>Theatre tickets and screening seat allocations are subject to theatre availability in participating Tamil Nadu districts.</li>
-          <li>BILET KOLLYWOOD GAMES PRIVATE LIMITED reserves the right to verify player identity and district residency before disbursing physical or digital screening passes.</li>
-        </ul>
-      </section>
+      <h2 id="the-service">1. The Service</h2>
+      <p>Kollywood Games is a free mobile quiz game for Tamil cinema fans. In game modes such as Enna Scene-uh, you look at an illustrated scene and guess the movie from four options, earn points and compete on leaderboards.</p>
 
-      <section class="terms-section">
-        <h2>5. In-App Purchases & Payments</h2>
-        <p>
-          In-app purchases and pass unlocks are processed securely via PhonePe. All digital goods take effect immediately in your player profile. For billing disputes or payment transaction errors, please contact <a href="mailto:support@kollywoodgames.com" style="color: var(--primary);">support@kollywoodgames.com</a> with your PhonePe Transaction ID.
-        </p>
-      </section>
+      <h2 id="eligibility">2. Who can play</h2>
+      <p>You must be at least [13] years old to use the Service. If you are under 18, you may use the Service only with the consent and supervision of a parent or guardian, who agrees to these Terms on your behalf. [Confirm minimum age with your lawyer.]</p>
 
-      <section class="terms-section">
-        <h2>6. Contact</h2>
-        <p>
-          <strong>BILET KOLLYWOOD GAMES PRIVATE LIMITED</strong><br>
-          SF NO 164/4A SITE NO 4, WEST, VINAYAGA GARDENS, Malumichampatti, Coimbatore - 641050, Tamil Nadu<br>
-          Email: <a href="mailto:support@kollywoodgames.com" style="color: var(--primary);">support@kollywoodgames.com</a>
-        </p>
-      </section>
-    </article>
+      <h2 id="accounts">3. Your account</h2>
+      <ul>
+        <li>You sign in using the methods available in the app, which are provided through Firebase Authentication.</li>
+        <li>Please give accurate information and keep your sign-in details secure. You are responsible for activity on your account.</li>
+        <li>One account per person. Accounts are personal and may not be sold, shared or transferred.</li>
+        <li>Choose a display name that is not offensive, misleading or someone else's identity. We may change or remove display names that break these Terms.</li>
+      </ul>
+
+      <h2 id="fair-play">4. Fair play</h2>
+      <p>The game is only fun when everyone plays fair. You agree not to:</p>
+      <ul>
+        <li>Use bots, scripts, automation, emulators, modified apps or any other tool to gain an unfair advantage.</li>
+        <li>Create or use multiple accounts, or play on someone else's account.</li>
+        <li>Exploit bugs or glitches instead of reporting them to us.</li>
+        <li>Copy, scrape, reverse engineer or interfere with the Service, its servers or its security.</li>
+        <li>Harass, abuse or impersonate other players, or use the Service for anything unlawful.</li>
+      </ul>
+      <p>If we reasonably believe you have broken these rules, we may reset scores, remove you from leaderboards, withhold rewards, or suspend or close your account.</p>
+
+      <h2 id="leaderboards">5. Leaderboards</h2>
+      <p>Your display name, avatar, score and rank may be shown publicly on leaderboards. Leaderboards may be reset from time to time. We may correct or remove scores that we believe are wrong or were achieved unfairly.</p>
+
+      <h2 id="rewards">6. Weekly rewards</h2>
+      <ul>
+        <li>We may give rewards to top players from time to time. Rewards are promotional, free of charge, and given at our discretion.</li>
+        <li>Details for each reward, including any eligibility requirements, will be shown in the app. Those details form part of these Terms.</li>
+        <li>To receive a reward you may need to respond within a set time and provide the details needed to deliver it. We may verify your identity and account activity before a reward is given.</li>
+        <li>Rewards cannot be exchanged for cash or transferred unless we say otherwise, and may be replaced with a reward of similar value if the original is unavailable.</li>
+        <li>We may change, pause or end rewards at any time. Any applicable taxes are your responsibility unless stated otherwise.</li>
+      </ul>
+
+      <h2 id="ads">7. Ads</h2>
+      <p>The Service is free and supported by ads, including ads served by Google AdMob. We are not responsible for the content of third-party ads or for any products, services or websites they promote. See our <a href="privacy-policy.html">privacy policy</a> for how ads use data.</p>
+
+      <h2 id="content">8. Content and intellectual property</h2>
+      <p>The Service, including the app, game design, software, text, logos and all quiz illustrations, is owned by or licensed to Bilet Kollywood Games Private Limited and is protected by law. All quiz illustrations are original artwork created for Kollywood Games.</p>
+      <p>Movie titles and other references to films are used only to identify them for trivia purposes and belong to their respective owners. Kollywood Games is an independent fan game and is not affiliated with, sponsored by or endorsed by any film studio, producer or artist.</p>
+      <p>We give you a personal, limited, non-exclusive, non-transferable, revocable licence to use the app on your own devices for personal, non-commercial entertainment, in line with these Terms.</p>
+      <p>If you believe something in the Service infringes your rights, please contact us with details and we will look into it promptly.</p>
+
+      <h2 id="your-content">9. Your content</h2>
+      <p>If you submit content to us, such as a display name, avatar, feedback or suggestions, you allow us to use it to run and improve the Service. You confirm that you have the right to share it and that it does not break the law or anyone's rights.</p>
+
+      <h2 id="availability">10. Availability and changes</h2>
+      <p>We work hard to keep the game running, but the Service is provided on an "as is" and "as available" basis. We may update, change, suspend or discontinue any part of it, including game modes, questions and features, at any time. Some features may need an internet connection and the latest version of the app.</p>
+
+      <h2 id="disclaimers">11. Disclaimers and limitation of liability</h2>
+      <p>To the extent permitted by law, we do not make any promises that the Service will be uninterrupted, error-free or that quiz content will always be accurate. To the extent permitted by law, we are not liable for any indirect, incidental or consequential loss arising from your use of the Service, and our total liability to you for any claim will not exceed [INR amount]. Nothing in these Terms limits any rights you have under applicable consumer protection law.</p>
+
+      <h2 id="termination">12. Suspension and termination</h2>
+      <p>You can stop using the Service and delete your account at any time. We may suspend or close your account if you break these Terms, if required by law, or if we stop providing the Service. Sections that by their nature should continue (such as intellectual property, disclaimers and governing law) will survive termination.</p>
+
+      <h2 id="law">13. Governing law and disputes</h2>
+      <p>These Terms are governed by the laws of India. Subject to applicable law, the courts at [Coimbatore, Tamil Nadu] will have exclusive jurisdiction over any dispute. Before going to court, please contact us so we can try to resolve the issue informally.</p>
+
+      <h2 id="changes">14. Changes to these terms</h2>
+      <p>We may update these Terms from time to time. We will post the new version on this page and update the date at the top. If the changes are significant, we will also let you know in the app. If you keep using the Service after changes take effect, you accept the updated Terms.</p>
+
+      <h2 id="contact">15. Contact</h2>
+      <p>Bilet Kollywood Games Private Limited<br>
+        CIN: [CIN]<br>
+        [Registered office address]<br>
+        Coimbatore, Tamil Nadu, India<br>
+        Email: <a href="mailto:[your-email@yourdomain.com]">[your-email@yourdomain.com]</a><br>
+        Phone: [+91 XXXXX XXXXX]</p>
+    </div>
   </main>
 
-  <footer>
-    <div class="footer-container">
-      <div style="color: var(--text-dim); font-size: 0.9rem;">&copy; 2026 Bilet Kollywood Games Private Limited. All rights reserved.</div>
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms.html" style="color: var(--primary);">Terms of Play</a>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <a class="wordmark" href="index.html" aria-label="Kollywood Games home">
+          <img src="images/logo-160.png" width="40" height="40" alt="" loading="lazy">
+          <span>Kollywood <span>Games</span></span>
+        </a>
+        <ul class="footer-links">
+          <li><a href="privacy-policy.html">Privacy policy</a></li>
+          <li><a href="terms.html" aria-current="page">Terms of use</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
       </div>
+      <p>&copy; 2026 Bilet Kollywood Games Private Limited. CIN: [CIN]. Coimbatore, Tamil Nadu, India. All quiz illustrations are original artwork.</p>
     </div>
   </footer>
+
+  <script src="script.js" defer></script>
 </body>
 
 </html>
