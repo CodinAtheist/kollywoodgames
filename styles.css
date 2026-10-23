@@ -866,6 +866,8 @@ a:hover { color: var(--ink); }
 .shots figure:nth-child(2) .phone { box-shadow: 8px 8px 0 var(--pink), 8px 8px 0 3px var(--indigo); }
 .shots figure:nth-child(3) .phone { box-shadow: 8px 8px 0 var(--teal), 8px 8px 0 3px var(--indigo); }
 
+.shots .phone::before { top: 30px; }
+
 .shots figcaption {
   margin-top: 22px;
   text-align: center;
