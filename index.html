@@ -46,7 +46,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Catamaran:wght@400;600;700;800&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
 
   <script type="application/ld+json">
   {
@@ -183,32 +183,21 @@
       <div class="container game-grid">
         <div class="banner-card">
           <div class="scene">
-            <svg viewBox="0 0 480 270" role="img" aria-label="Original illustration in the style of a hand-painted movie banner: a hero striking a pose on a hill at sunset, with spotlights in the sky">
-              <defs>
-                <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B1446"/><stop offset=".55" stop-color="#E3336B"/><stop offset="1" stop-color="#FFC23C"/></linearGradient>
-              </defs>
-              <rect width="480" height="270" fill="url(#sky2)"/>
-              <path d="M90 0 L150 270 H180 L110 0z M390 0 L300 270 H330 L410 0z" fill="#FFF8EC" opacity=".18"/>
-              <circle cx="240" cy="180" r="70" fill="#FFC23C"/>
-              <circle cx="240" cy="180" r="54" fill="#FFF8EC" opacity=".55"/>
-              <path d="M0 210 Q120 160 240 200 T480 190 V270 H0z" fill="#139488"/>
-              <path d="M0 238 Q140 210 260 232 T480 228 V270 H0z" fill="#1B1446"/>
-              <path d="M70 232 l6-96" stroke="#1B1446" stroke-width="7"/>
-              <path d="M76 136 q-34 6-50 24 M76 136 q-28-16-54-10 M76 136 q30-14 54-2 M76 136 q32 8 46 30" stroke="#1B1446" stroke-width="7" fill="none" stroke-linecap="round"/>
-              <path d="M420 230 l-5-80" stroke="#1B1446" stroke-width="6"/>
-              <path d="M415 150 q-26 4-40 20 M415 150 q-22-12-44-6 M415 150 q24-12 44 0 M415 150 q26 8 36 26" stroke="#1B1446" stroke-width="6" fill="none" stroke-linecap="round"/>
-              <circle cx="240" cy="150" r="13" fill="#1B1446"/>
-              <path d="M240 163 v40 M240 172 l-28-24 M240 172 l26-30 M240 203 l-16 28 M240 203 l16 28" stroke="#1B1446" stroke-width="9" stroke-linecap="round"/>
-              <path d="M228 168 l-6 46 h36 l-6-46z" fill="#1B1446"/>
-            </svg>
+            <img src="images/scene-1.webp" width="963" height="537" loading="lazy" decoding="async"
+              alt="Illustrated movie scene: a young man in a hoodie and an older man with glasses and a walking stick chat on a park bench at sunset">
           </div>
-          <p class="caption">Which movie is this scene from?</p>
-          <ul class="option-grid" aria-label="Four answer options">
-            <li><b>A</b> 24</li>
-            <li><b>B</b> Vikram Vedha</li>
-            <li><b>C</b> Asuran</li>
-            <li><b>D</b> Anbe Sivam</li>
+          <p class="caption" id="quiz-q">Which movie is this scene from?</p>
+          <ul class="option-grid" aria-labelledby="quiz-q">
+            <li><button type="button" class="quiz-opt"><b>A</b> 24</button></li>
+            <li><button type="button" class="quiz-opt"><b>B</b> Vikram Vedha</button></li>
+            <li><button type="button" class="quiz-opt"><b>C</b> Asuran</button></li>
+            <li><button type="button" class="quiz-opt" data-correct><b>D</b> Anbe Sivam</button></li>
           </ul>
+          <div class="quiz-footer">
+            <p class="quiz-result" role="status" aria-live="polite">Tap an option to play.</p>
+            <button type="button" class="quiz-again" hidden>Play again</button>
+          </div>
+          <div class="confetti" aria-hidden="true"></div>
         </div>
 
         <div>
@@ -400,7 +389,7 @@
             </li>
             <li>
               <span class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Registered office</span>
-              <address>Bilet Kollywood Games Private Limited<br>Coimbatore 641050, Tamil Nadu, India</address>
+              <address>Bilet Kollywood Games Private Limited.<br>Coimbatore-641050, Tamil Nadu, India</address>
             </li>
           </ul>
         </div>
@@ -426,7 +415,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=4" defer></script>
+  <script src="script.js?v=5" defer></script>
 </body>
 
 </html>
