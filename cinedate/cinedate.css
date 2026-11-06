@@ -29,7 +29,8 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(7, 9, 14, 0.88
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
 .brand-sub { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
 .nav-links { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
-.hero-logo { border-radius: 27px; box-shadow: 0 12px 40px rgba(255, 61, 154, 0.35); margin-bottom: 1.2rem; }
+.hero-logo { display: block; margin: 0 auto 1.4rem; border-radius: 27px; box-shadow: 0 12px 40px rgba(255, 61, 154, 0.35); }
+.policy-hero .policy-badge { display: inline-block; margin-bottom: 1.2rem; }
 .nav-btn { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 0.45rem 0.9rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.2s ease; white-space: nowrap; }
 .nav-btn:hover { color: var(--primary); border-color: var(--primary); background: var(--primary-glow-soft); }
 
