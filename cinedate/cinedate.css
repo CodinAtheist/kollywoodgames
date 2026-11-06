@@ -26,8 +26,10 @@ header { position: sticky; top: 0; z-index: 100; background: rgba(7, 9, 14, 0.88
 .brand-link { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: var(--text-main); }
 .brand-logo { height: 42px; width: auto; }
 .brand-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; letter-spacing: 0.05em; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.brand-sub { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-left: 0.4rem; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-sub { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
 .nav-links { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+.hero-logo { border-radius: 27px; box-shadow: 0 12px 40px rgba(255, 61, 154, 0.35); margin-bottom: 1.2rem; }
 .nav-btn { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 0.45rem 0.9rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.2s ease; white-space: nowrap; }
 .nav-btn:hover { color: var(--primary); border-color: var(--primary); background: var(--primary-glow-soft); }
 
@@ -51,6 +53,7 @@ main { position: relative; z-index: 1; max-width: 960px; margin: 3rem auto 6rem;
 .policy-section h3 { font-size: 1.15rem; color: var(--primary-light); margin: 1.4rem 0 0.6rem; font-weight: 600; }
 .policy-section p { color: #cbd5e1; font-size: 0.98rem; margin-bottom: 1rem; }
 .policy-section ul, .policy-section ol { margin-left: 1.5rem; margin-bottom: 1.2rem; color: #cbd5e1; }
+.policy-section ol li { margin-bottom: 0.9rem; }
 .policy-section li { margin-bottom: 0.5rem; font-size: 0.96rem; }
 .policy-section strong { color: #ffffff; }
 .policy-section a { color: var(--primary-light); }
@@ -74,8 +77,18 @@ footer { border-top: 1px solid rgba(245, 158, 11, 0.2); background: #040609; pad
 .footer-links a:hover, .footer-links a.active { color: var(--primary); }
 
 @media (max-width: 768px) {
-  .policy-content { padding: 1.75rem; }
-  .policy-hero h1 { font-size: 2rem; }
+  header { padding: 0.75rem 1rem; }
+  .nav-container { flex-wrap: wrap; gap: 0.6rem; }
+  .brand-logo { height: 36px; }
+  .brand-title { font-size: 1.1rem; }
+  .nav-links { width: 100%; flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 2px; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-btn { font-size: 0.85rem; padding: 0.4rem 0.75rem; }
+  main { margin-top: 2rem; }
+  .policy-content { padding: 1.5rem; }
+  .policy-hero h1 { font-size: 2.1rem; }
+  .policy-hero p { font-size: 1rem; }
+  .cta-row { flex-direction: column; align-items: stretch; }
+  .cta-btn { text-align: center; }
   .footer-bottom { flex-direction: column; text-align: center; }
-  .brand-sub { display: none; }
 }
